@@ -4,8 +4,10 @@ import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ArrowLeft, ExternalLink } from "lucide-react";
+import { getMDXContent } from "@/lib/utils/mdx";
+import { generateFAQSchema } from "@/components/SEO";
 
-// 博客文章内容（实际项目中应该从文件系统或 CMS 读取）
+// 保留硬编码内容作为后备（如果 MDX 文件不存在）
 const blogContent: Record<string, { title: string; content: string; date: string; category: string }> = {
   "2026-brazil-igaming-payment-report": {
     title: "2026 巴西 iGaming 支付报告：PIX 成功率分析",
@@ -241,14 +243,21 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  // 优先从 MDX 读取
+  const mdxData = getMDXContent("blog", slug);
+  if (mdxData) {
+    return {
+      title: mdxData.frontMatter.title,
+      description: `${mdxData.frontMatter.title} - BR21 行业洞察`,
+    };
+  }
+  // 后备：使用硬编码数据
   const post = blogContent[slug];
-
   if (!post) {
     return {
       title: "文章未找到",
     };
   }
-
   return {
     title: post.title,
     description: `${post.title} - BR21 行业洞察`,
@@ -261,7 +270,27 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = blogContent[slug];
+  
+  // 优先从 MDX 读取
+  const mdxData = getMDXContent("blog", slug);
+  let post: { title: string; content: string; date: string; category: string } | null = null;
+  let faqSchema = null;
+
+  if (mdxData) {
+    post = {
+      title: mdxData.frontMatter.title,
+      content: mdxData.content,
+      date: mdxData.frontMatter.date || new Date().toISOString(),
+      category: mdxData.frontMatter.category || "未分类",
+    };
+    // 生成 FAQ Schema（如果存在）
+    if (mdxData.frontMatter.faq && mdxData.frontMatter.faq.length > 0) {
+      faqSchema = generateFAQSchema(mdxData.frontMatter.faq);
+    }
+  } else {
+    // 后备：使用硬编码数据
+    post = blogContent[slug] || null;
+  }
 
   if (!post) {
     return (
@@ -278,19 +307,25 @@ export default async function BlogPostPage({
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12">
-      <div className="mb-8">
-        <Link
-          href="/zh/blog"
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          返回博客列表
-        </Link>
-      </div>
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+        <div className="mb-8">
+          <Link
+            href="/zh/blog"
+            className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            返回博客列表
+          </Link>
+        </div>
 
-      <div className="flex gap-8">
-        {/* 主内容区 */}
-        <article className="flex-1">
+        <div className="flex gap-8">
+          {/* 主内容区 */}
+          <article className="flex-1">
           <div className="mb-6">
             <div className="mb-4 flex items-center gap-3">
               <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-900 dark:text-blue-300">

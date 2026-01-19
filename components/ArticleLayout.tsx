@@ -34,8 +34,6 @@ export default function ArticleLayout({ frontMatter, content }: ArticleLayoutPro
       {frontMatter.risks && <RiskNotes items={frontMatter.risks} />}
 
       {frontMatter.faq && <FAQ items={frontMatter.faq} />}
-
-      <CTA />
     </article>
   );
 }

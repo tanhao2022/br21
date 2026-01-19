@@ -11,6 +11,9 @@ export interface MDXFrontMatter {
   process?: Array<{ title: string; description: string }>;
   risks?: string[];
   faq?: Array<{ question: string; answer: string }>;
+  date?: string;
+  category?: string;
+  tags?: string[];
 }
 
 export interface MDXContent {
@@ -65,4 +68,33 @@ export function getAllMDXContent(directory: string): MDXContent[] {
       return getMDXContent(directory, slug);
     })
     .filter((content): content is MDXContent => content !== null);
+}
+
+export function getRelatedPosts(
+  tag: string,
+  limit: number = 3,
+  excludeSlug?: string
+): MDXContent[] {
+  const allPosts = getAllMDXContent("blog");
+  
+  // 筛选包含指定 tag 的文章（通过 category 或 tags 字段）
+  const relatedPosts = allPosts
+    .filter((post) => {
+      if (post.slug === excludeSlug) return false;
+      const frontMatter = post.frontMatter;
+      const categoryMatch = frontMatter.category?.toLowerCase().includes(tag.toLowerCase());
+      const tagsMatch = frontMatter.tags?.some((t) =>
+        t.toLowerCase().includes(tag.toLowerCase())
+      );
+      return categoryMatch || tagsMatch;
+    })
+    .sort((a, b) => {
+      // 按日期倒序排序
+      const dateA = a.frontMatter.date ? new Date(a.frontMatter.date).getTime() : 0;
+      const dateB = b.frontMatter.date ? new Date(b.frontMatter.date).getTime() : 0;
+      return dateB - dateA;
+    })
+    .slice(0, limit);
+
+  return relatedPosts;
 }

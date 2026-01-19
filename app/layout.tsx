@@ -32,10 +32,36 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID || "G-69WC2TF9H7";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.br21.com";
+
+  // 全局 Organization Schema
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "BR21",
+    url: baseUrl,
+    logo: `${baseUrl}/favicon.ico`, // 使用 favicon 作为占位符，待后续添加实际 logo
+    description:
+      "全球 iGaming 流量增长引擎，提供 Facebook、Google 广告投放与风控解决方案。",
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "Customer Service",
+      availableLanguage: ["Chinese", "English"],
+      areaServed: ["CN", "BR", "IN", "ID", "PH", "VN"],
+    },
+    sameAs: ["https://t.me/youfa8577"],
+  };
 
   return (
     <html lang="zh-CN">
       <body className={`${inter.variable} font-sans antialiased`}>
+        {/* 全局 Organization Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
         {/* Google tag (gtag.js) */}
         {gaId && (
           <>
