@@ -43,11 +43,13 @@ export default function Navbar() {
             </Link>
 
             {/* 市场解决方案下拉菜单 */}
-            <div className="relative">
+            <div
+              className="relative group"
+              onMouseEnter={() => setIsDropdownOpen(true)}
+              onMouseLeave={() => setIsDropdownOpen(false)}
+            >
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                onMouseEnter={() => setIsDropdownOpen(true)}
-                onMouseLeave={() => setIsDropdownOpen(false)}
                 className="flex items-center gap-1 text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
               >
                 市场解决方案
@@ -60,9 +62,8 @@ export default function Navbar() {
 
               {isDropdownOpen && (
                 <div
-                  className="absolute left-0 top-full z-50 mt-2 w-72 rounded-lg border border-gray-200 bg-white shadow-xl dark:border-gray-700 dark:bg-gray-800"
-                  onMouseEnter={() => setIsDropdownOpen(true)}
-                  onMouseLeave={() => setIsDropdownOpen(false)}
+                  className="absolute left-0 top-full z-50 w-72 rounded-lg border border-gray-200 bg-white shadow-xl dark:border-gray-700 dark:bg-gray-800"
+                  style={{ marginTop: "0.5rem" }}
                 >
                   <div className="py-2">
                     {/* 拉美市场 */}
