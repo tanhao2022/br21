@@ -4,7 +4,7 @@ import { Send } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "首页",
-  description: "BR21 - 专业的slot类项目广告投放服务，专注巴西市场",
+  description: "BR21 - 全球 iGaming 流量增长引擎。深耕东南亚、印度、拉美核心市场，提供 Facebook、Google、TikTok 一站式广告投放与风控解决方案",
 };
 
 const hotMarkets = [
@@ -74,10 +74,10 @@ export default function ZhHome() {
       {/* Hero Section */}
       <div className="mx-auto max-w-6xl px-4 py-12">
         <h1 className="mb-6 text-4xl font-bold text-gray-900 dark:text-gray-100">
-          欢迎来到 BR21
+          BR21：全球 iGaming 流量增长引擎
         </h1>
         <p className="mb-6 text-lg leading-8 text-gray-700 dark:text-gray-300">
-          专业的slot类项目广告投放服务，专注巴西市场，面向中文客户。
+          不止巴西。深耕东南亚、印度、拉美核心市场。为中文客户提供 Facebook、Google、TikTok 一站式广告投放与风控解决方案。
         </p>
 
         {/* CTA Button */}
