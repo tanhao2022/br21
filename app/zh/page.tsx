@@ -94,10 +94,10 @@ export default function ZhHome() {
         </div>
 
         {/* Hero Cards - 确保与下方4个卡片总宽度对齐 */}
-        <div className="mb-12 flex gap-6">
+        <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2">
           <Link
             href="/zh/brazil-slot-ditou"
-            className="flex-1 rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md dark:border-gray-700 dark:bg-gray-800"
+            className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md dark:border-gray-700 dark:bg-gray-800"
           >
             <h2 className="mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
               巴西老虎机代投
@@ -109,7 +109,7 @@ export default function ZhHome() {
 
           <Link
             href="/zh/slot-ditou"
-            className="flex-1 rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md dark:border-gray-700 dark:bg-gray-800"
+            className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md dark:border-gray-700 dark:bg-gray-800"
           >
             <h2 className="mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
               Slot代投服务
@@ -125,7 +125,7 @@ export default function ZhHome() {
           <h2 className="mb-6 text-3xl font-bold text-gray-900 dark:text-gray-100">
             热门市场
           </h2>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {hotMarkets.map((market) => (
               <Link
                 key={market.href}
