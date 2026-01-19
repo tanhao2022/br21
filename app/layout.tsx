@@ -10,6 +10,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.br21.com"
+  ),
   title: {
     default: "BR21 | 老虎机代投服务",
     template: "%s | BR21",

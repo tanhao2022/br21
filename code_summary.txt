@@ -68,9 +68,14 @@ FILE: ./app/zh/brazil-slot-ditou/page.tsx
 ----------------------------------------
 
 import { Metadata } from "next";
-import { getMDXContent } from "@/lib/utils/mdx";
+import { getMDXContent, getRelatedPosts } from "@/lib/utils/mdx";
 import ArticleLayout from "@/components/ArticleLayout";
-import { generateServiceSchema } from "@/components/SEO";
+import {
+  generateServiceSchema,
+  generateFAQSchema,
+} from "@/components/SEO";
+import RelatedPosts from "@/components/RelatedPosts";
+import CTA from "@/components/CTA";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -108,7 +113,7 @@ export default async function BrazilSlotDitouPage() {
     return <div>内容未找到</div>;
   }
 
-  const jsonLd = generateServiceSchema({
+  const serviceSchema = generateServiceSchema({
     serviceType: "Slot Advertising",
     serviceName: data.frontMatter.title,
     description: data.frontMatter.description,
@@ -133,12 +138,27 @@ export default async function BrazilSlotDitouPage() {
     ],
   });
 
+  // 生成 FAQ Schema（如果存在）
+  const faqSchema =
+    data.frontMatter.faq && data.frontMatter.faq.length > 0
+      ? generateFAQSchema(data.frontMatter.faq)
+      : null;
+
+  // 获取相关文章（基于 Brazil 关键词）
+  const relatedPosts = getRelatedPosts("Brazil", 3);
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <ArticleLayout
         frontMatter={data.frontMatter}
         content={
@@ -147,6 +167,8 @@ export default async function BrazilSlotDitouPage() {
           </ReactMarkdown>
         }
       />
+      {relatedPosts.length > 0 && <RelatedPosts posts={relatedPosts} />}
+      <CTA />
     </>
   );
 }
@@ -156,9 +178,14 @@ FILE: ./app/zh/vietnam-tai-xiu-ads/page.tsx
 ----------------------------------------
 
 import { Metadata } from "next";
-import { getMDXContent } from "@/lib/utils/mdx";
+import { getMDXContent, getRelatedPosts } from "@/lib/utils/mdx";
 import ArticleLayout from "@/components/ArticleLayout";
-import { generateServiceSchema } from "@/components/SEO";
+import {
+  generateServiceSchema,
+  generateFAQSchema,
+} from "@/components/SEO";
+import RelatedPosts from "@/components/RelatedPosts";
+import CTA from "@/components/CTA";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -196,7 +223,7 @@ export default async function VietnamTaiXiuAdsPage() {
     return <div>内容未找到</div>;
   }
 
-  const jsonLd = generateServiceSchema({
+  const serviceSchema = generateServiceSchema({
     serviceType: "Slot Advertising",
     serviceName: data.frontMatter.title,
     description: data.frontMatter.description,
@@ -217,12 +244,27 @@ export default async function VietnamTaiXiuAdsPage() {
     ],
   });
 
+  // 生成 FAQ Schema（如果存在）
+  const faqSchema =
+    data.frontMatter.faq && data.frontMatter.faq.length > 0
+      ? generateFAQSchema(data.frontMatter.faq)
+      : null;
+
+  // 获取相关文章
+  const relatedPosts = getRelatedPosts("Vietnam", 3);
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <ArticleLayout
         frontMatter={data.frontMatter}
         content={
@@ -231,6 +273,8 @@ export default async function VietnamTaiXiuAdsPage() {
           </ReactMarkdown>
         }
       />
+      {relatedPosts.length > 0 && <RelatedPosts posts={relatedPosts} />}
+      <CTA />
     </>
   );
 }
@@ -388,9 +432,14 @@ FILE: ./app/zh/indonesia-slot-gacor/page.tsx
 ----------------------------------------
 
 import { Metadata } from "next";
-import { getMDXContent } from "@/lib/utils/mdx";
+import { getMDXContent, getRelatedPosts } from "@/lib/utils/mdx";
 import ArticleLayout from "@/components/ArticleLayout";
-import { generateServiceSchema } from "@/components/SEO";
+import {
+  generateServiceSchema,
+  generateFAQSchema,
+} from "@/components/SEO";
+import RelatedPosts from "@/components/RelatedPosts";
+import CTA from "@/components/CTA";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -428,7 +477,7 @@ export default async function IndonesiaSlotGacorPage() {
     return <div>内容未找到</div>;
   }
 
-  const jsonLd = generateServiceSchema({
+  const serviceSchema = generateServiceSchema({
     serviceType: "Slot Advertising",
     serviceName: data.frontMatter.title,
     description: data.frontMatter.description,
@@ -449,12 +498,27 @@ export default async function IndonesiaSlotGacorPage() {
     ],
   });
 
+  // 生成 FAQ Schema（如果存在）
+  const faqSchema =
+    data.frontMatter.faq && data.frontMatter.faq.length > 0
+      ? generateFAQSchema(data.frontMatter.faq)
+      : null;
+
+  // 获取相关文章
+  const relatedPosts = getRelatedPosts("Indonesia", 3);
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <ArticleLayout
         frontMatter={data.frontMatter}
         content={
@@ -463,6 +527,8 @@ export default async function IndonesiaSlotGacorPage() {
           </ReactMarkdown>
         }
       />
+      {relatedPosts.length > 0 && <RelatedPosts posts={relatedPosts} />}
+      <CTA />
     </>
   );
 }
@@ -576,8 +642,10 @@ import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ArrowLeft, ExternalLink } from "lucide-react";
+import { getMDXContent, getMDXFiles } from "@/lib/utils/mdx";
+import { generateFAQSchema } from "@/components/SEO";
 
-// 博客文章内容（实际项目中应该从文件系统或 CMS 读取）
+// 保留硬编码内容作为后备（如果 MDX 文件不存在）
 const blogContent: Record<string, { title: string; content: string; date: string; category: string }> = {
   "2026-brazil-igaming-payment-report": {
     title: "2026 巴西 iGaming 支付报告：PIX 成功率分析",
@@ -780,7 +848,17 @@ Cloaking 技术存在一定风险，建议：
 
 // 生成静态参数（用于静态导出）
 export async function generateStaticParams() {
-  return Object.keys(blogContent).map((slug) => ({
+  // 优先从 MDX 文件读取
+  const mdxFiles = getMDXFiles("blog");
+  const mdxSlugs = mdxFiles.map((file) => file.replace(/\.(mdx|md)$/, ""));
+  
+  // 合并硬编码的 slug（作为后备）
+  const hardcodedSlugs = Object.keys(blogContent);
+  
+  // 合并并去重
+  const allSlugs = [...new Set([...mdxSlugs, ...hardcodedSlugs])];
+  
+  return allSlugs.map((slug) => ({
     slug,
   }));
 }
@@ -813,14 +891,21 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  // 优先从 MDX 读取
+  const mdxData = getMDXContent("blog", slug);
+  if (mdxData) {
+    return {
+      title: mdxData.frontMatter.title,
+      description: `${mdxData.frontMatter.title} - BR21 行业洞察`,
+    };
+  }
+  // 后备：使用硬编码数据
   const post = blogContent[slug];
-
   if (!post) {
     return {
       title: "文章未找到",
     };
   }
-
   return {
     title: post.title,
     description: `${post.title} - BR21 行业洞察`,
@@ -833,7 +918,27 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = blogContent[slug];
+  
+  // 优先从 MDX 读取
+  const mdxData = getMDXContent("blog", slug);
+  let post: { title: string; content: string; date: string; category: string } | null = null;
+  let faqSchema = null;
+
+  if (mdxData) {
+    post = {
+      title: mdxData.frontMatter.title,
+      content: mdxData.content,
+      date: mdxData.frontMatter.date || new Date().toISOString(),
+      category: mdxData.frontMatter.category || "未分类",
+    };
+    // 生成 FAQ Schema（如果存在）
+    if (mdxData.frontMatter.faq && mdxData.frontMatter.faq.length > 0) {
+      faqSchema = generateFAQSchema(mdxData.frontMatter.faq);
+    }
+  } else {
+    // 后备：使用硬编码数据
+    post = blogContent[slug] || null;
+  }
 
   if (!post) {
     return (
@@ -850,19 +955,25 @@ export default async function BlogPostPage({
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12">
-      <div className="mb-8">
-        <Link
-          href="/zh/blog"
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          返回博客列表
-        </Link>
-      </div>
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+        <div className="mb-8">
+          <Link
+            href="/zh/blog"
+            className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            返回博客列表
+          </Link>
+        </div>
 
-      <div className="flex gap-8">
-        {/* 主内容区 */}
-        <article className="flex-1">
+        <div className="flex gap-8">
+          {/* 主内容区 */}
+          <article className="flex-1">
           <div className="mb-6">
             <div className="mb-4 flex items-center gap-3">
               <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-900 dark:text-blue-300">
@@ -996,9 +1107,14 @@ FILE: ./app/zh/india-rummy-uac/page.tsx
 ----------------------------------------
 
 import { Metadata } from "next";
-import { getMDXContent } from "@/lib/utils/mdx";
+import { getMDXContent, getRelatedPosts } from "@/lib/utils/mdx";
 import ArticleLayout from "@/components/ArticleLayout";
-import { generateServiceSchema } from "@/components/SEO";
+import {
+  generateServiceSchema,
+  generateFAQSchema,
+} from "@/components/SEO";
+import RelatedPosts from "@/components/RelatedPosts";
+import CTA from "@/components/CTA";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -1036,7 +1152,7 @@ export default async function IndiaRummyUacPage() {
     return <div>内容未找到</div>;
   }
 
-  const jsonLd = generateServiceSchema({
+  const serviceSchema = generateServiceSchema({
     serviceType: "Slot Advertising",
     serviceName: data.frontMatter.title,
     description: data.frontMatter.description,
@@ -1057,12 +1173,30 @@ export default async function IndiaRummyUacPage() {
     ],
   });
 
+  // 生成 FAQ Schema（如果存在）
+  const faqSchema =
+    data.frontMatter.faq && data.frontMatter.faq.length > 0
+      ? generateFAQSchema(data.frontMatter.faq)
+      : null;
+
+  // 获取相关文章（优先匹配 India，如果没有则尝试 Rummy）
+  let relatedPosts = getRelatedPosts("India", 3);
+  if (relatedPosts.length === 0) {
+    relatedPosts = getRelatedPosts("Rummy", 3);
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <ArticleLayout
         frontMatter={data.frontMatter}
         content={
@@ -1071,6 +1205,8 @@ export default async function IndiaRummyUacPage() {
           </ReactMarkdown>
         }
       />
+      {relatedPosts.length > 0 && <RelatedPosts posts={relatedPosts} />}
+      <CTA />
     </>
   );
 }
@@ -1300,9 +1436,14 @@ FILE: ./app/zh/philippines-jili-gcash/page.tsx
 ----------------------------------------
 
 import { Metadata } from "next";
-import { getMDXContent } from "@/lib/utils/mdx";
+import { getMDXContent, getRelatedPosts } from "@/lib/utils/mdx";
 import ArticleLayout from "@/components/ArticleLayout";
-import { generateServiceSchema } from "@/components/SEO";
+import {
+  generateServiceSchema,
+  generateFAQSchema,
+} from "@/components/SEO";
+import RelatedPosts from "@/components/RelatedPosts";
+import CTA from "@/components/CTA";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -1340,7 +1481,7 @@ export default async function PhilippinesJiliGcashPage() {
     return <div>内容未找到</div>;
   }
 
-  const jsonLd = generateServiceSchema({
+  const serviceSchema = generateServiceSchema({
     serviceType: "Slot Advertising",
     serviceName: data.frontMatter.title,
     description: data.frontMatter.description,
@@ -1361,12 +1502,27 @@ export default async function PhilippinesJiliGcashPage() {
     ],
   });
 
+  // 生成 FAQ Schema（如果存在）
+  const faqSchema =
+    data.frontMatter.faq && data.frontMatter.faq.length > 0
+      ? generateFAQSchema(data.frontMatter.faq)
+      : null;
+
+  // 获取相关文章
+  const relatedPosts = getRelatedPosts("Philippines", 3);
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <ArticleLayout
         frontMatter={data.frontMatter}
         content={
@@ -1375,6 +1531,8 @@ export default async function PhilippinesJiliGcashPage() {
           </ReactMarkdown>
         }
       />
+      {relatedPosts.length > 0 && <RelatedPosts posts={relatedPosts} />}
+      <CTA />
     </>
   );
 }
@@ -1385,9 +1543,14 @@ FILE: ./app/zh/bangladesh-betting-traffic/page.tsx
 ----------------------------------------
 
 import { Metadata } from "next";
-import { getMDXContent } from "@/lib/utils/mdx";
+import { getMDXContent, getRelatedPosts } from "@/lib/utils/mdx";
 import ArticleLayout from "@/components/ArticleLayout";
-import { generateServiceSchema } from "@/components/SEO";
+import {
+  generateServiceSchema,
+  generateFAQSchema,
+} from "@/components/SEO";
+import RelatedPosts from "@/components/RelatedPosts";
+import CTA from "@/components/CTA";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -1425,7 +1588,7 @@ export default async function BangladeshBettingTrafficPage() {
     return <div>内容未找到</div>;
   }
 
-  const jsonLd = generateServiceSchema({
+  const serviceSchema = generateServiceSchema({
     serviceType: "Slot Advertising",
     serviceName: data.frontMatter.title,
     description: data.frontMatter.description,
@@ -1446,12 +1609,27 @@ export default async function BangladeshBettingTrafficPage() {
     ],
   });
 
+  // 生成 FAQ Schema（如果存在）
+  const faqSchema =
+    data.frontMatter.faq && data.frontMatter.faq.length > 0
+      ? generateFAQSchema(data.frontMatter.faq)
+      : null;
+
+  // 获取相关文章
+  const relatedPosts = getRelatedPosts("Bangladesh", 3);
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <ArticleLayout
         frontMatter={data.frontMatter}
         content={
@@ -1460,6 +1638,8 @@ export default async function BangladeshBettingTrafficPage() {
           </ReactMarkdown>
         }
       />
+      {relatedPosts.length > 0 && <RelatedPosts posts={relatedPosts} />}
+      <CTA />
     </>
   );
 }
@@ -1689,9 +1869,14 @@ FILE: ./app/zh/slot-ditou/page.tsx
 ----------------------------------------
 
 import { Metadata } from "next";
-import { getMDXContent } from "@/lib/utils/mdx";
+import { getMDXContent, getRelatedPosts } from "@/lib/utils/mdx";
 import ArticleLayout from "@/components/ArticleLayout";
-import { generateServiceSchema } from "@/components/SEO";
+import {
+  generateServiceSchema,
+  generateFAQSchema,
+} from "@/components/SEO";
+import RelatedPosts from "@/components/RelatedPosts";
+import CTA from "@/components/CTA";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -1729,7 +1914,7 @@ export default async function SlotDitouPage() {
     return <div>内容未找到</div>;
   }
 
-  const jsonLd = generateServiceSchema({
+  const serviceSchema = generateServiceSchema({
     serviceType: "Slot Advertising",
     serviceName: data.frontMatter.title,
     description: data.frontMatter.description,
@@ -1758,12 +1943,27 @@ export default async function SlotDitouPage() {
     ],
   });
 
+  // 生成 FAQ Schema（如果存在）
+  const faqSchema =
+    data.frontMatter.faq && data.frontMatter.faq.length > 0
+      ? generateFAQSchema(data.frontMatter.faq)
+      : null;
+
+  // 获取相关文章（基于通用关键词）
+  const relatedPosts = getRelatedPosts("市场", 3);
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <ArticleLayout
         frontMatter={data.frontMatter}
         content={
@@ -1772,6 +1972,8 @@ export default async function SlotDitouPage() {
           </ReactMarkdown>
         }
       />
+      {relatedPosts.length > 0 && <RelatedPosts posts={relatedPosts} />}
+      <CTA />
     </>
   );
 }
@@ -1781,39 +1983,75 @@ FILE: ./app/sitemap.ts
 ----------------------------------------
 
 import { MetadataRoute } from "next";
+import { getMDXFiles } from "@/lib/utils/mdx";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://br21.com";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.br21.com";
 
-  const routes = [
-    "",
-    "/zh",
-    "/zh/slot-ditou",
-    "/zh/laohuji-ditou",
-    "/zh/brazil-slot-ditou",
-    "/zh/brazil-slot-ditou/facebook",
-    "/zh/brazil-slot-ditou/risk",
-    "/zh/markets",
-    "/zh/india-rummy-uac",
-    "/zh/indonesia-slot-gacor",
-    "/zh/philippines-jili-gcash",
-    "/zh/vietnam-tai-xiu-ads",
-    "/zh/bangladesh-betting-traffic",
-    "/zh/about",
-    "/zh/blog", // Blog index page
-    "/zh/blog/2026-brazil-igaming-payment-report", // Blog posts
-    "/zh/blog/facebook-cloaking-3-0-solution",
-    "/zh/blog/india-rummy-uac-case-study",
+  // 获取动态路由
+  const serviceFiles = getMDXFiles("pages");
+  const blogFiles = getMDXFiles("blog");
+
+  // 生成服务页面路由（从 content/pages 目录）
+  const serviceRoutes = serviceFiles.map((file) => {
+    const slug = file.replace(/\.(mdx|md)$/, "");
+    return {
+      url: `${baseUrl}/zh/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    };
+  });
+
+  // 生成博客文章路由（从 content/blog 目录）
+  const blogRoutes = blogFiles.map((file) => {
+    const slug = file.replace(/\.(mdx|md)$/, "");
+    return {
+      url: `${baseUrl}/zh/blog/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    };
+  });
+
+  // 静态路由
+  const staticRoutes: MetadataRoute.Sitemap = [
+    {
+      url: baseUrl,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/zh`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 1.0, // 首页最高优先级
+    },
+    {
+      url: `${baseUrl}/zh/markets`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/zh/about`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/zh/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.5,
+    },
   ];
 
-  return routes.map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: route === "/zh" ? 1 : 0.8,
-  }));
+  // 合并所有路由
+  return [...staticRoutes, ...serviceRoutes, ...blogRoutes];
 }
 
 ----------------------------------------
@@ -1854,10 +2092,36 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID || "G-69WC2TF9H7";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.br21.com";
+
+  // 全局 Organization Schema
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "BR21",
+    url: baseUrl,
+    logo: `${baseUrl}/favicon.ico`, // 使用 favicon 作为占位符，待后续添加实际 logo
+    description:
+      "全球 iGaming 流量增长引擎，提供 Facebook、Google 广告投放与风控解决方案。",
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "Customer Service",
+      availableLanguage: ["Chinese", "English"],
+      areaServed: ["CN", "BR", "IN", "ID", "PH", "VN"],
+    },
+    sameAs: ["https://t.me/youfa8577"],
+  };
 
   return (
     <html lang="zh-CN">
       <body className={`${inter.variable} font-sans antialiased`}>
+        {/* 全局 Organization Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
         {/* Google tag (gtag.js) */}
         {gaId && (
           <>
@@ -1923,6 +2187,541 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+----------------------------------------
+FILE: ./content/blog/brazil-pix-payment-optimization.mdx
+----------------------------------------
+
+---
+title: "2026 巴西 PIX 掉单率高达 20%？揭秘 3 个被忽略的支付路由陷阱"
+description: "巴西 Slot 投放不仅看素材，更看支付成功率。深度解析 PIX 掉单的根本原因（CPF 验证、网络拥堵、银行风控），并提供动态支付路由优化方案，实测挽回 15% 利润。"
+keywords: "巴西 PIX 支付, Slot 代投, 支付成功率, PIX 掉单"
+date: "2026-01-23"
+tags: ["Brazil", "Payment", "Tech"]
+category: "技术方案"
+quickAnswer: "PIX 掉单主要源于：1. 用户 CPF 信息不匹配；2. 偏远地区网络超时；3. 银行夜间风控。BR21 通过'动态支付路由'技术，智能切换高成功率通道，并优化 H5 支付页加载速度，可将成功率稳定在 85% 以上。"
+keyPoints:
+  - "巴西 PIX 虽然方便，但在 Slot 充值场景下，平均失败率高达 23%"
+  - "很多盘总只关注广告 CPA，却忽略了支付页面的漏斗损耗"
+  - "动态路由系统能在 0.5 秒内检测通道健康度，自动切换备用支付商"
+  - "优化 CPF 输入框的用户体验，可以减少 30% 的用户主动跳出"
+process:
+  - title: "支付数据诊断"
+    description: "分析过去 7 天的交易日志，识别高失败率的时段和银行节点。"
+  - title: "路由策略配置"
+    description: "接入 BR21 动态路由系统，配置主备通道切换逻辑（如：Nubank 优先，Itaú 备用）。"
+  - title: "页面加载优化"
+    description: "压缩支付页代码，移除不必要的 JS 脚本，确保在 3G 网络下也能秒开。"
+  - title: "异常监控"
+    description: "设置实时报警，一旦成功率低于阈值，自动触发人工介入。"
+risks:
+  - "单一支付通道风险极大，一旦被风控，全盘流量瘫痪"
+  - "收集用户 CPF 信息需符合巴西 LGPD 数据保护法"
+faq:
+  - question: "什么是动态支付路由？"
+    answer: "就像高德地图避开拥堵路段一样。当检测到某个银行（如 Bradesco）接口响应慢时，系统自动将用户引导至其他通畅的支付网关，用户全程无感。"
+  - question: "优化支付页面能带来多少 ROI 提升？"
+    answer: "根据我们的实测数据，每提升 1% 的支付成功率，ROI 直接提升 5%-8%。这是纯利润，不需要多花一分钱广告费。"
+---
+
+# 流量进来了，钱没进来？
+
+在巴西做 Slot，很多盘总每天盯着 Facebook 的 CPM 和 CPC，却忽略了一个致命的漏桶：**支付成功率**。
+
+我们的数据显示，在晚间高峰期，某些单一通道的 PIX 失败率甚至能达到 **40%**。这意味着你每花 100 美元买来的流量，有 40 美元直接打水漂了。
+
+## PIX 掉单的三大元凶
+
+### 1. 银行风控拦截
+
+巴西央行对夜间（20:00 - 06:00）的大额转账有风控限制。如果你的支付通道没有针对博彩行业做特殊报备或轮询，很容易被误杀。
+
+### 2. 网络延迟与超时
+
+巴西的基础设施建设不平衡。在里约和圣保罗以外的地区，4G 信号并不稳定。如果你的支付页面加载超过 **3 秒**，50% 的用户会直接关闭。
+
+### 3. CPF（税号）验证失败
+
+很多第三方支付为了省事，要求用户填写极为详细的个人信息。对于急着玩一把的赌客来说，多填一个空，就多一分流失。
+
+## BR21 的解决方案：动态路由 + 轻量化页面
+
+我们不仅仅代投广告，更解决**"入金难"**的问题。
+
+* **智能切换**：集成多家巴西本地支付商，系统实时监控成功率。A 通道挂了，毫秒级切换到 B 通道。
+* **极简支付页**：我们重新设计了支付 UI，自动校验 CPF 格式，减少用户输入错误。
+* **失败召回**：对于点击了支付但未成功的用户，系统自动发送短信/WhatsApp 提醒，挽回率可达 10%。
+
+**不想让广告费打水漂？**
+
+联系 BR21，免费帮您做一次支付健康度诊断。
+
+
+----------------------------------------
+FILE: ./content/blog/facebook-account-ban-solution.mdx
+----------------------------------------
+
+---
+title: "Facebook 广告账户秒封魔咒：二不限户 + Cloaking 3.0 的终极解法"
+description: "在 FB 跑 Slot/Crypto 最怕什么？封号！本文深度解析市面上'二不限'、'三不限'账户的真假，并揭秘 Cloaking 3.0 技术如何通过 IP 指纹识别完美规避审核爬虫。"
+keywords: "Facebook 封号, 二不限户, Cloaking 技术, 广告防封"
+date: "2026-01-24"
+tags: ["Tech", "Facebook", "Cloaking"]
+category: "技术方案"
+quickAnswer: "封号是常态，生存靠技术。真正的'二不限'账户（不限域名、不限主页）配合 Cloaking 3.0 技术（IP 指纹屏蔽），能将账户存活周期延长 3-5 倍。不要裸跑链接，那是自寻死路。"
+keyPoints:
+  - "市面上 80% 的'海外户'都是套路，必须识别真正的二不限白名单户"
+  - "Cloaking 3.0 不再只看 IP，而是综合分析 User-Agent、设备指纹和浏览行为"
+  - "二不限账户优势：主页挂了换主页，Pixel 数据不丢失，机器学习不中断"
+process:
+  - title: "账户甄选"
+    description: "根据预算选择二不限或三不限账户，确保是一级代理下户，非黑户。"
+  - title: "Cloaking 部署"
+    description: "部署 BR21 自研斗篷系统，配置安全页（Safe Page）和落地页（Money Page）。"
+  - title: "AB 测试"
+    description: "小预算测试不同素材的过审率，建立素材黑白名单。"
+risks:
+  - "使用 Cloaking 技术存在一定风险，建议仅用于合规灰色地带项目"
+  - "账户被封后余额转移需要时间，需提前做好资金规划"
+faq:
+  - question: "用了 Cloaking 还会被封吗？"
+    answer: "没有任何技术能保证 100% 不封号。Cloaking 的作用是大幅降低机器审核封号的概率，延长账户寿命，让你有足够的时间跑出 ROI。"
+  - question: "二不限和三不限的区别？"
+    answer: "二不限：不限域名、不限主页。三不限：不限域名、不限主页、不限额度（适合日耗 $5000+ 大户）。"
+---
+
+# 告别"上号即封"的恶性循环
+
+做 Slot 投流的优化师，每天早上醒来第一件事就是看号还在不在。账户被封不仅损失钱，更重要的是**打断了 Pixel 的机器学习**，导致模型跑飞，成本飙升。
+
+## 为什么你的号总是挂？
+
+1. **关联封锁**：一台电脑登录多个账号，指纹没处理干净，一封封一串。
+2. **素材违规**：直接在素材里展示"赢钱"、"提现"等敏感画面，触发 OCR 拦截。
+3. **落地页违规**：裸跑 H5 链接，被 FB 爬虫直接抓取到博彩内容。
+
+## 破局：账户资源 + 技术壁垒
+
+### 1. 真正的"二不限"白名单户
+
+不要去买市面上几十块钱的"黑号"或"账单户"。你需要的是**企业级白名单户**。
+
+BR21 提供的二不限账户，即使主页（Fan Page）被封，换一个主页就能继续跑，广告账户本身不受影响，Pixel 数据得以保留。
+
+### 2. Cloaking 3.0：隐形斗篷
+
+我们的系统拥有全球最大的**FB 审核员 IP 黑名单库**。
+
+* **审核员看到的**：一个正规的游戏资讯网站或生活博客（Safe Page）。
+* **真实玩家看到的**：极具诱惑力的 Slot 注册下载页（Money Page）。
+
+这一切都在 **0.01 秒**内完成判断，真实用户完全无感。
+
+**稳定，才是最大的暴利。**
+
+停止每天找号的低效劳动，把精力花在优化 ROI 上。
+
+
+----------------------------------------
+FILE: ./content/blog/2026-brazil-igaming-payment-report.mdx
+----------------------------------------
+
+---
+title: "2026 巴西 iGaming 支付报告：PIX 成功率分析"
+date: "2026-01-22"
+category: "市场趋势"
+tags: ["Brazil", "Payment", "Report"]
+---
+
+# 2026 巴西 iGaming 支付报告：PIX 成功率分析
+
+## 执行摘要
+
+根据 BR21 团队 2025 年 Q4 至 2026 年 Q1 的投放数据，巴西 iGaming 市场 PIX 支付成功率呈现显著波动。本文基于超过 **$500 万** 的广告消耗数据，深度分析 PIX 支付失败的根本原因，并提供可落地的优化方案。
+
+## 核心发现
+
+### 1. PIX 支付失败率高达 23%
+
+在分析的 12,000+ 笔交易中，PIX 支付失败率平均为 **23%**，远高于行业预期的 15%。主要失败原因包括：
+
+- **网络延迟**：占失败总数的 42%
+- **银行风控拦截**：占失败总数的 31%
+- **用户操作错误**：占失败总数的 18%
+- **技术对接问题**：占失败总数的 9%
+
+### 2. 时段差异显著
+
+PIX 支付成功率在不同时段存在明显差异：
+
+- **工作日 10:00-14:00**：成功率 85%（高峰期）
+- **工作日 18:00-22:00**：成功率 72%（低峰期）
+- **周末全天**：成功率 78%（中等）
+
+### 3. 银行差异分析
+
+不同银行的 PIX 支付成功率差异较大：
+
+| 银行 | 成功率 | 平均处理时间 |
+|------|--------|-------------|
+| Nubank | 89% | 2.3秒 |
+| Banco do Brasil | 82% | 3.1秒 |
+| Itaú | 79% | 3.5秒 |
+| Bradesco | 76% | 4.2秒 |
+
+## 优化方案
+
+### 方案一：多银行分流策略
+
+通过智能路由系统，将用户引导至成功率更高的银行渠道。实测可将整体成功率提升 **12%**。
+
+### 方案二：支付页面优化
+
+- 减少页面加载时间至 1.5 秒以内
+- 添加支付进度可视化
+- 优化移动端体验
+
+### 方案三：重试机制
+
+对于失败交易，自动触发重试机制，最多重试 3 次，间隔 30 秒。
+
+## 结论
+
+PIX 支付优化是巴西 iGaming 市场 ROI 提升的关键环节。通过技术优化和策略调整，可将整体支付成功率提升至 **90%+**，显著改善用户转化漏斗。
+
+---
+
+*本报告基于 BR21 团队真实投放数据，如需完整数据报告，请联系我们的专业团队。*
+
+
+----------------------------------------
+FILE: ./content/blog/india-rummy-uac-case-study.mdx
+----------------------------------------
+
+---
+title: "印度 Rummy 案例：如何通过 UAC 2.5 实现 500% ROI"
+date: "2026-01-18"
+category: "成功案例"
+tags: ["India", "Rummy", "Case Study"]
+---
+
+# 印度 Rummy 案例：如何通过 UAC 2.5 实现 500% ROI
+
+## 客户背景
+
+**产品类型**：印度 Rummy 真金游戏  
+**目标市场**：印度全境  
+**初始状态**：日耗 $5K，ROI 120%，无法扩量
+
+## 挑战分析
+
+### 问题 1：UAC 安装量质量差
+
+初始使用 UAC Install 优化，虽然 CPI 低（$0.8），但用户质量极差：
+- 注册率：仅 35%
+- 首充率：仅 8%
+- Day-3 留存：仅 12%
+
+### 问题 2：无法规模化
+
+尝试扩量时，ROI 迅速下降，无法突破 $10K/日瓶颈。
+
+## 解决方案
+
+### 阶段一：切换到 UAC 2.5 事件优化
+
+将优化目标从 Install 改为 **AddCash（充值）事件**：
+
+- CPI 提升至 $2.5
+- 但注册率提升至 68%
+- 首充率提升至 24%
+
+### 阶段二：深度事件回传
+
+对接 AppsFlyer，回传以下事件：
+- `af_purchase`（充值）
+- `af_revenue`（收入）
+- `af_roas`（广告支出回报率）
+
+### 阶段三：素材本地化
+
+- 使用印地语真人素材
+- 强调"提现到账"真实案例
+- CTR 提升 40%
+
+## 成果数据
+
+| 指标 | 优化前 | 优化后 | 提升 |
+|------|--------|--------|------|
+| 日消耗 | $5K | $50K | 10x |
+| ROI | 120% | 500% | 4.2x |
+| 注册率 | 35% | 68% | 94% |
+| 首充率 | 8% | 24% | 200% |
+| Day-3 留存 | 12% | 35% | 192% |
+
+## 关键成功因素
+
+1. **事件优化策略**：从 Install 到 AddCash 的转变是关键
+2. **数据回传完整性**：完整的事件回传让 Google 算法更精准
+3. **素材本地化**：真人素材大幅提升转化率
+
+## 经验总结
+
+- UAC 2.5 适合有明确转化事件的 iGaming 产品
+- 深度事件回传是规模化扩量的前提
+- 本地化素材是提升 ROI 的核心
+
+---
+
+*本案例基于真实客户数据，如需类似方案，请联系 BR21 专业团队。*
+
+
+----------------------------------------
+FILE: ./content/blog/indonesia-kol-marketing.mdx
+----------------------------------------
+
+---
+title: "印尼 Slot Gacor 投不动？试试 KOL 直播 + 暴富剧本的降维打击"
+description: "印尼市场 FB 硬广成本飙升，转化却越来越差？BR21 独家签约 50+ 本地 Slot 主播，通过直播带玩和短视频暴富剧本，CTR 提升 300%，留存率极高。"
+keywords: "印尼 Slot, KOL 直播, 暴富剧本, 流量获取"
+date: "2026-01-25"
+tags: ["Indonesia", "Slot", "KOL"]
+category: "市场策略"
+quickAnswer: "印尼用户极度依赖社交信任。单纯的图片广告已失效。通过签约本地 KOL 进行'直播带玩'，展示真实爆奖过程，并配合 TikTok/Reels 的'暴富剧情'短视频，能瞬间引爆流量，且用户粘性极高。"
+keyPoints:
+  - "印尼是全球社交媒体重度使用国，KOL 意见对用户决策影响巨大"
+  - "直播带玩模式：所见即所得，解决了用户对'平台真实性'的怀疑"
+  - "暴富剧本：通过短视频演绎'由于玩 Slot 改变命运'的故事，极具煽动性"
+process:
+  - title: "KOL 资源对接"
+    description: "BR21 拥有 50+ 印尼本地签约主播，覆盖 Facebook Live、YouTube、TikTok 平台。"
+  - title: "剧本定制"
+    description: "为每个主播定制'暴富剧本'，设计输赢节奏和情绪爆发点，最大化转化效果。"
+  - title: "私域引流"
+    description: "直播间挂专属链接，引导至 WhatsApp/Telegram 群组，进行二次转化和长期运营。"
+risks:
+  - "KOL 合作需要预付费用，需评估 ROI 是否覆盖成本"
+  - "直播内容需符合平台规范，避免被限流或封号"
+faq:
+  - question: "KOL 直播带玩的转化率比硬广高多少？"
+    answer: "根据我们的数据，KOL 直播的 CTR 比硬广高 300%，注册转化率提升 150%，首充率提升 80%。虽然单次成本可能略高，但用户质量极好，LTV 远超硬广用户。"
+  - question: "如何确保 KOL 不会刷量？"
+    answer: "我们只与有真实粉丝基础的腰部主播合作，并要求提供后台数据验证。同时，我们会监控注册用户的设备指纹和行为轨迹，识别异常流量。"
+---
+
+# 硬广已死，内容为王
+
+在印尼，随便找张图写上 "Slot Gacor" 就能跑量的时代已经结束了。现在的印尼玩家由于被洗了太多遍，对硬广不仅免疫，甚至反感。
+
+## 为什么 KOL 直播是印尼市场的"核武器"？
+
+### 1. 解决信任危机
+
+印尼诈骗盘很多，玩家不敢充值。当看到自己关注的真实主播在直播间里充值、游玩、提现，这种**信任背书**是任何广告语都无法替代的。
+
+### 2. 情绪价值拉满
+
+Slot 玩的不是游戏，是**心跳**。直播间里主播大喊 "Maxwin!" "Jackpot!" 的氛围，能极大刺激观众的赌徒心理，从众效应明显。
+
+## BR21 的网红矩阵
+
+我们不找头部大 V（太贵且转化差），我们专注**腰部垂类主播**。
+
+* **资源库**：50+ 印尼本地签约主播，专注于 Slot/Domino 游戏。
+* **剧本定制**：我们会给主播提供"剧本"，什么时候输、什么时候赢、什么时候情绪爆发，都有精心设计。
+* **私域引流**：直播间挂专属链接，直接引导至 WhatsApp 或 Telegram 群组进行二次转化。
+
+想在 2.7 亿人口的印尼市场分一杯羹？换个打法，效果天差地别。
+
+
+----------------------------------------
+FILE: ./content/blog/india-rummy-fake-traffic.mdx
+----------------------------------------
+
+---
+title: "印度 Rummy 全是机器人？教你用 Google UAC 事件流筛选真实充值粉"
+description: "印度市场不缺流量，缺的是真人。解析为何你的 UAC 跑出来的全是羊毛党，以及如何通过 AddCash 深度事件优化和 PWA 技术，获取高质量的真实充值用户。"
+keywords: "印度 Rummy, 假量, UAC 优化, 真实充值"
+date: "2026-01-26"
+tags: ["India", "Rummy", "UAC"]
+category: "投放优化"
+quickAnswer: "很多盘总为了贪便宜跑 UAC Install，结果全是机器人。破局关键在于：1. 放弃 Install 优化，转向 AddCash（充值）事件优化；2. 使用 PWA 技术规避 Google Play 审核；3. 本地化真人素材建立信任。"
+keyPoints:
+  - "印度假量产业成熟，专门有刷安装的工作室，必须通过深度事件过滤"
+  - "UAC 2.5 适合前期跑量，UAC 3.0 适合后期优化 ROI，需混合使用"
+  - "真人口播素材（Testimonials）在印度市场的转化率比纯动画高 40%"
+process:
+  - title: "事件回传配置"
+    description: "对接 AppsFlyer/Adjust，将用户的'充值'行为实时回传给 Google，而非仅仅回传'安装'。"
+  - title: "PWA 技术部署"
+    description: "使用 PWA 技术绕过 Google Play 审核，用户点击广告后直接安装，体验与原生 App 一致。"
+  - title: "素材本地化"
+    description: "使用印地语真人素材，强调'提现到账'真实案例，建立用户信任。"
+risks:
+  - "深度事件优化初期成本较高，需要足够的预算支撑冷启动期"
+  - "PWA 技术需要前端开发支持，技术门槛相对较高"
+faq:
+  - question: "为什么 Install 优化会带来假量？"
+    answer: "因为 Google 的算法会寻找'喜欢安装 App'的用户。在印度，有很多工作室专门刷安装量，这些用户安装后从不打开，更不会充值。只有优化到'充值'事件，Google 才会找到真正有支付习惯的用户。"
+  - question: "PWA 和原生 App 有什么区别？"
+    answer: "PWA（Progressive Web App）无需上架 Google Play，用户点击广告后直接安装到手机桌面，体验和原生 App 一模一样。优势是永不受商店审核限制，劣势是需要一定的前端开发能力。"
+---
+
+# 别被 $0.1 的 CPI 骗了
+
+在印度做 Rummy，很多老板看到 $0.1 甚至更低的 CPI（安装成本）很开心，结果一看后端数据：注册率 10%，充值率 0%。
+
+**恭喜你，你买了一堆孟买机房里的机器人。**
+
+## 如何清洗流量？Google UAC "事件流" 战法
+
+Google 的算法很聪明，你想要什么，它就给你什么。
+
+* 如果你优化 **Install**：Google 会把广告投给那些"喜欢安装 App"的人（包括刷量子）。
+* 如果你优化 **AddCash**：Google 会寻找那些**有支付习惯、有充值历史**的真实高价值用户。
+
+### BR21 的 UAC 3.0 策略
+
+我们不看 CPI，我们只看 **CPR (Cost Per Register)** 和 **CPP (Cost Per Purchase)**。
+
+1. **数据回传**：对接 AppsFlyer/Adjust，将用户的"充值"行为实时回传给 Google。
+2. **模型矫正**：在冷启动期，即使成本高，也要强行跑充值事件，让 Google 建立正确的用户模型。
+3. **PWA 助攻**：由于 Google Play 对 RMG 管控严，我们使用 PWA 技术。用户点击广告 -> 自动安装 PWA -> 像原生 App 一样打开。没有商店审核，永不下架。
+
+做印度市场，**质量 > 数量**。1 个充值大户抵得上 10000 个机器人。
+
+
+----------------------------------------
+FILE: ./content/blog/facebook-cloaking-3-0-solution.mdx
+----------------------------------------
+
+---
+title: "Facebook Cloaking 3.0：iGaming 广告防封技术详解"
+date: "2026-01-20"
+category: "技术方案"
+tags: ["Tech", "Cloaking", "Facebook"]
+---
+
+# Facebook Cloaking 3.0：iGaming 广告防封技术详解
+
+## 什么是 Cloaking？
+
+Cloaking（斗篷技术）是一种广告审核规避技术，通过识别访问者的身份（真实用户 vs. 审核爬虫），展示不同的内容，从而通过平台审核。
+
+## Cloaking 3.0 核心技术
+
+### 1. IP 指纹识别
+
+通过分析访问者的 IP 地址、User-Agent、设备指纹等多维度数据，精准识别 Facebook 审核爬虫。
+
+**识别准确率**：99.7%
+
+### 2. 动态域名轮询
+
+当检测到域名被标记或封禁时，系统自动切换到备用域名，确保广告链接 24 小时畅通。
+
+**切换时间**：< 0.5 秒
+
+### 3. Safe Page 策略
+
+为审核爬虫展示完全合规的"安全页"，如游戏攻略、新闻资讯等，确保 100% 过审。
+
+## 技术架构
+
+```
+用户点击广告
+    ↓
+Cloaking 系统分析访问者指纹
+    ↓
+判断：真实用户 or 审核爬虫？
+    ↓
+真实用户 → 展示落地页（Money Page）
+审核爬虫 → 展示安全页（Safe Page）
+```
+
+## 实施建议
+
+1. **使用企业级 Cloaking 服务**：自建成本高，维护难度大
+2. **定期更新 IP 库**：审核爬虫 IP 库需要实时更新
+3. **A/B 测试 Safe Page**：不同 Safe Page 的过审率存在差异
+
+## 风险提示
+
+Cloaking 技术存在一定风险，建议：
+
+- 仅用于合规灰色地带项目
+- 配合高质量账户资源使用
+- 定期监控账户健康度
+
+---
+
+*BR21 提供企业级 Cloaking 解决方案，如需技术咨询，请联系我们的技术团队。*
+
+
+----------------------------------------
+FILE: ./content/blog/philippines-messenger-bot.mdx
+----------------------------------------
+
+---
+title: "菲律宾 GCash 入金率提升实战：Messenger Bot 自动追单策略拆解"
+description: "菲律宾玩家最喜欢用 Facebook，利用这一特点，通过 Messenger Bot 进行自动化追单和召回。当用户注册未充值时，自动发送首充优惠，转化率提升 30%。"
+keywords: "菲律宾代投, GCash, Messenger Bot, 用户召回"
+date: "2026-01-27"
+tags: ["Philippines", "GCash", "Bot"]
+category: "用户运营"
+quickAnswer: "菲律宾是全球社交媒体使用时长最长的国家。利用 Messenger Bot，我们可以在用户'注册但未充值'的黄金 30 分钟内，自动发送针对性的优惠信息，大幅提升 GCash 入金率。"
+keyPoints:
+  - "菲律宾 90% 的入金通过 GCash，支付路径必须顺滑"
+  - "Messenger 的打开率远高于短信和邮件，是最佳的追单渠道"
+  - "自动化脚本：注册后 5 分钟无动作 -> 推送新手礼包；注册后 24 小时 -> 推送赢钱案例"
+process:
+  - title: "Bot 脚本配置"
+    description: "根据用户行为（注册、充值失败、沉默）配置不同的触发条件和话术模板。"
+  - title: "GCash 支付优化"
+    description: "确保支付页面能顺畅唤起 GCash APP，减少支付摩擦和跳出率。"
+  - title: "数据监控"
+    description: "实时监控 Bot 的发送率、打开率和转化率，持续优化话术和时机。"
+risks:
+  - "Messenger Bot 需遵守 Facebook 的自动化消息政策，避免被标记为垃圾信息"
+  - "过度推送可能导致用户反感，需控制发送频率"
+faq:
+  - question: "Messenger Bot 的转化率比短信高多少？"
+    answer: "根据我们的数据，Messenger Bot 的打开率是短信的 5 倍，转化率是短信的 3 倍。因为菲律宾人几乎 24 小时在线，Messenger 是他们最常用的沟通工具。"
+  - question: "如何避免 Bot 被 Facebook 封禁？"
+    answer: "关键是要在用户主动触发的情况下发送消息（如用户点击了某个按钮），而不是主动群发。同时，要确保消息内容有价值，不是纯广告，避免被用户举报。"
+---
+
+# 别让用户在支付环节流失
+
+菲律宾玩家很成熟，LTV（生命周期价值）很高，但他们也很"懒"。很多时候，用户注册了账号，但在跳转 GCash 支付时犹豫了，或者被打断了。
+
+如果不做干预，这部分用户就永久流失了。
+
+## Messenger Bot：你的 24 小时金牌销售
+
+在菲律宾，**Facebook Messenger** 就是他们的微信。
+
+BR21 开发了一套自动化的 Messenger 追单系统，它能监听用户的行为状态，并触发相应的脚本：
+
+### 场景一：注册未充值
+
+* **触发时间**：注册后 15 分钟
+* **Bot 话术**：*"Hey！你的 100% 首充红利还在等你，只限今天！点击下方按钮立即领取！"*
+* **效果**：利用"损失厌恶"心理，刺激冲动消费。
+
+### 场景二：充值失败
+
+* **触发时间**：检测到 GCash 回调失败
+* **Bot 话术**：*"看起来 GCash 网络有点拥堵？试试 7-11 充值，额外送 50 P！"*
+* **效果**：给出替代方案，挽回支付意向。
+
+### 场景三：沉默唤醒
+
+* **触发时间**：用户 3 天未登录
+* **Bot 话术**：发送一张其他玩家中大奖的截图 + *"下一个可能就是你！"*
+
+这套系统一旦部署，就是**全自动印钞机**。它不需要休息，不知疲倦地为你挽回每一个可能的流失用户。
 
 
 ----------------------------------------
@@ -3765,6 +4564,64 @@ export default function Navbar() {
 
 
 ----------------------------------------
+FILE: ./components/RelatedPosts.tsx
+----------------------------------------
+
+import Link from "next/link";
+import { MDXContent } from "@/lib/utils/mdx";
+
+interface RelatedPostsProps {
+  posts: MDXContent[];
+}
+
+export default function RelatedPosts({ posts }: RelatedPostsProps) {
+  if (!posts || posts.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="my-12 rounded-lg border border-gray-200 bg-gray-50 p-8 dark:border-gray-700 dark:bg-gray-800">
+      <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-gray-100">
+        相关文章推荐
+      </h2>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => (
+          <Link
+            key={post.slug}
+            href={`/zh/blog/${post.slug}`}
+            className="group rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-all hover:border-blue-300 hover:shadow-md dark:border-gray-700 dark:bg-gray-900"
+          >
+            <div className="mb-3 flex items-center gap-2">
+              {post.frontMatter.category && (
+                <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-900 dark:text-blue-300">
+                  {post.frontMatter.category}
+                </span>
+              )}
+              {post.frontMatter.date && (
+                <span className="text-xs text-gray-500 dark:text-gray-400">
+                  {new Date(post.frontMatter.date).toLocaleDateString("zh-CN", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </span>
+              )}
+            </div>
+            <h3 className="mb-3 text-lg font-bold text-gray-900 group-hover:text-blue-600 dark:text-gray-100 dark:group-hover:text-blue-400">
+              {post.frontMatter.title}
+            </h3>
+            <p className="text-sm leading-6 text-gray-600 dark:text-gray-400">
+              {post.frontMatter.description}
+            </p>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
+----------------------------------------
 FILE: ./components/FloatingContact.tsx
 ----------------------------------------
 
@@ -3951,6 +4808,30 @@ export function generateServiceSchema({
   };
 }
 
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export function generateFAQSchema(faqItems: FAQItem[]) {
+  if (!faqItems || faqItems.length === 0) {
+    return null;
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+}
+
 ----------------------------------------
 FILE: ./components/ProcessFlow.tsx
 ----------------------------------------
@@ -4069,8 +4950,6 @@ export default function ArticleLayout({ frontMatter, content }: ArticleLayoutPro
       {frontMatter.risks && <RiskNotes items={frontMatter.risks} />}
 
       {frontMatter.faq && <FAQ items={frontMatter.faq} />}
-
-      <CTA />
     </article>
   );
 }
@@ -4284,6 +5163,9 @@ export interface MDXFrontMatter {
   process?: Array<{ title: string; description: string }>;
   risks?: string[];
   faq?: Array<{ question: string; answer: string }>;
+  date?: string;
+  category?: string;
+  tags?: string[];
 }
 
 export interface MDXContent {
@@ -4338,6 +5220,35 @@ export function getAllMDXContent(directory: string): MDXContent[] {
       return getMDXContent(directory, slug);
     })
     .filter((content): content is MDXContent => content !== null);
+}
+
+export function getRelatedPosts(
+  tag: string,
+  limit: number = 3,
+  excludeSlug?: string
+): MDXContent[] {
+  const allPosts = getAllMDXContent("blog");
+  
+  // 筛选包含指定 tag 的文章（通过 category 或 tags 字段）
+  const relatedPosts = allPosts
+    .filter((post) => {
+      if (post.slug === excludeSlug) return false;
+      const frontMatter = post.frontMatter;
+      const categoryMatch = frontMatter.category?.toLowerCase().includes(tag.toLowerCase());
+      const tagsMatch = frontMatter.tags?.some((t) =>
+        t.toLowerCase().includes(tag.toLowerCase())
+      );
+      return categoryMatch || tagsMatch;
+    })
+    .sort((a, b) => {
+      // 按日期倒序排序
+      const dateA = a.frontMatter.date ? new Date(a.frontMatter.date).getTime() : 0;
+      const dateB = b.frontMatter.date ? new Date(b.frontMatter.date).getTime() : 0;
+      return dateB - dateA;
+    })
+    .slice(0, limit);
+
+  return relatedPosts;
 }
 
 ----------------------------------------
