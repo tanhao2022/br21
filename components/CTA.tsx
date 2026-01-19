@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { sendGAEvent } from "@/lib/gtag";
 
 interface CTAProps {
   text?: string;
@@ -7,6 +10,10 @@ interface CTAProps {
 export default function CTA({
   text = "联系我们了解更多",
 }: CTAProps) {
+  const handleClick = () => {
+    sendGAEvent("click_contact_tg", "lead_generation", "article_bottom_cta");
+  };
+
   return (
     <div className="my-12 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 p-8 text-center shadow-lg dark:from-blue-700 dark:to-blue-800">
       <h2 className="mb-4 text-2xl font-bold text-white">
@@ -17,6 +24,7 @@ export default function CTA({
         href="https://t.me/youfa8577"
         target="_blank"
         rel="noopener noreferrer"
+        onClick={handleClick}
         className="inline-flex items-center gap-2 rounded-lg bg-white px-8 py-3 text-lg font-semibold text-blue-600 transition-colors hover:bg-blue-50 dark:text-blue-700"
       >
         <svg

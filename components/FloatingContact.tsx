@@ -2,9 +2,11 @@
 
 import React from "react";
 import { Send } from "lucide-react";
+import { sendGAEvent } from "@/lib/gtag";
 
 export default function FloatingContact() {
   const handleClick = () => {
+    sendGAEvent("click_contact_tg", "lead_generation", "floating_button");
     window.open("https://t.me/youfa8577", "_blank", "noopener,noreferrer");
   };
 

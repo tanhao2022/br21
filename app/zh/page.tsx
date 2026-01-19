@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Send } from "lucide-react";
+import HeroCTA from "./HeroCTA";
 
 export const metadata: Metadata = {
   title: "首页",
@@ -82,15 +83,7 @@ export default function ZhHome() {
 
         {/* CTA Button */}
         <div className="mb-12">
-          <Link
-            href="https://t.me/youfa8577"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 rounded-lg bg-blue-600 px-6 py-3 text-lg font-semibold text-white shadow-lg transition-all hover:scale-105 hover:bg-blue-700 active:scale-95 dark:bg-blue-500 dark:hover:bg-blue-600"
-          >
-            <Send className="h-5 w-5" />
-            <span>立即咨询专家</span>
-          </Link>
+          <HeroCTA />
         </div>
 
         {/* Hero Cards - 确保与下方4个卡片总宽度对齐 */}
