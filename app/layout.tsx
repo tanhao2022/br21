@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import FloatingContact from "@/components/FloatingContact";
 
@@ -30,9 +31,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID || "";
+
   return (
     <html lang="zh-CN">
       <body className={`${inter.variable} font-sans antialiased`}>
+        {gaId && <GoogleAnalytics gaId={gaId} />}
         {children}
         <FloatingContact />
       </body>

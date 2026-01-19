@@ -20,6 +20,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/zh/vietnam-tai-xiu-ads",
     "/zh/bangladesh-betting-traffic",
     "/zh/about",
+    "/zh/blog", // Blog index page
+    "/zh/blog/2026-brazil-igaming-payment-report", // Blog posts
+    "/zh/blog/facebook-cloaking-3-0-solution",
+    "/zh/blog/india-rummy-uac-case-study",
   ];
 
   return routes.map((route) => ({

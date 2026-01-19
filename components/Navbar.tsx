@@ -29,6 +29,13 @@ export default function Navbar() {
             </Link>
 
             <Link
+              href="/zh/blog"
+              className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
+            >
+              行业洞察
+            </Link>
+
+            <Link
               href="/zh/about"
               className="text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400"
             >
