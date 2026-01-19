@@ -1,0 +1,51 @@
+---
+title: "印度 Rummy 全是机器人？教你用 Google UAC 事件流筛选真实充值粉"
+description: "印度市场不缺流量，缺的是真人。解析为何你的 UAC 跑出来的全是羊毛党，以及如何通过 AddCash 深度事件优化和 PWA 技术，获取高质量的真实充值用户。"
+keywords: "印度 Rummy, 假量, UAC 优化, 真实充值"
+date: "2026-01-26"
+tags: ["India", "Rummy", "UAC"]
+category: "投放优化"
+quickAnswer: "很多盘总为了贪便宜跑 UAC Install，结果全是机器人。破局关键在于：1. 放弃 Install 优化，转向 AddCash（充值）事件优化；2. 使用 PWA 技术规避 Google Play 审核；3. 本地化真人素材建立信任。"
+keyPoints:
+  - "印度假量产业成熟，专门有刷安装的工作室，必须通过深度事件过滤"
+  - "UAC 2.5 适合前期跑量，UAC 3.0 适合后期优化 ROI，需混合使用"
+  - "真人口播素材（Testimonials）在印度市场的转化率比纯动画高 40%"
+process:
+  - title: "事件回传配置"
+    description: "对接 AppsFlyer/Adjust，将用户的'充值'行为实时回传给 Google，而非仅仅回传'安装'。"
+  - title: "PWA 技术部署"
+    description: "使用 PWA 技术绕过 Google Play 审核，用户点击广告后直接安装，体验与原生 App 一致。"
+  - title: "素材本地化"
+    description: "使用印地语真人素材，强调'提现到账'真实案例，建立用户信任。"
+risks:
+  - "深度事件优化初期成本较高，需要足够的预算支撑冷启动期"
+  - "PWA 技术需要前端开发支持，技术门槛相对较高"
+faq:
+  - question: "为什么 Install 优化会带来假量？"
+    answer: "因为 Google 的算法会寻找'喜欢安装 App'的用户。在印度，有很多工作室专门刷安装量，这些用户安装后从不打开，更不会充值。只有优化到'充值'事件，Google 才会找到真正有支付习惯的用户。"
+  - question: "PWA 和原生 App 有什么区别？"
+    answer: "PWA（Progressive Web App）无需上架 Google Play，用户点击广告后直接安装到手机桌面，体验和原生 App 一模一样。优势是永不受商店审核限制，劣势是需要一定的前端开发能力。"
+---
+
+# 别被 $0.1 的 CPI 骗了
+
+在印度做 Rummy，很多老板看到 $0.1 甚至更低的 CPI（安装成本）很开心，结果一看后端数据：注册率 10%，充值率 0%。
+
+**恭喜你，你买了一堆孟买机房里的机器人。**
+
+## 如何清洗流量？Google UAC "事件流" 战法
+
+Google 的算法很聪明，你想要什么，它就给你什么。
+
+* 如果你优化 **Install**：Google 会把广告投给那些"喜欢安装 App"的人（包括刷量子）。
+* 如果你优化 **AddCash**：Google 会寻找那些**有支付习惯、有充值历史**的真实高价值用户。
+
+### BR21 的 UAC 3.0 策略
+
+我们不看 CPI，我们只看 **CPR (Cost Per Register)** 和 **CPP (Cost Per Purchase)**。
+
+1. **数据回传**：对接 AppsFlyer/Adjust，将用户的"充值"行为实时回传给 Google。
+2. **模型矫正**：在冷启动期，即使成本高，也要强行跑充值事件，让 Google 建立正确的用户模型。
+3. **PWA 助攻**：由于 Google Play 对 RMG 管控严，我们使用 PWA 技术。用户点击广告 -> 自动安装 PWA -> 像原生 App 一样打开。没有商店审核，永不下架。
+
+做印度市场，**质量 > 数量**。1 个充值大户抵得上 10000 个机器人。

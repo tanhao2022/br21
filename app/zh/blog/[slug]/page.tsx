@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ArrowLeft, ExternalLink } from "lucide-react";
-import { getMDXContent } from "@/lib/utils/mdx";
+import { getMDXContent, getMDXFiles } from "@/lib/utils/mdx";
 import { generateFAQSchema } from "@/components/SEO";
 
 // 保留硬编码内容作为后备（如果 MDX 文件不存在）
@@ -210,7 +210,17 @@ Cloaking 技术存在一定风险，建议：
 
 // 生成静态参数（用于静态导出）
 export async function generateStaticParams() {
-  return Object.keys(blogContent).map((slug) => ({
+  // 优先从 MDX 文件读取
+  const mdxFiles = getMDXFiles("blog");
+  const mdxSlugs = mdxFiles.map((file) => file.replace(/\.(mdx|md)$/, ""));
+  
+  // 合并硬编码的 slug（作为后备）
+  const hardcodedSlugs = Object.keys(blogContent);
+  
+  // 合并并去重
+  const allSlugs = [...new Set([...mdxSlugs, ...hardcodedSlugs])];
+  
+  return allSlugs.map((slug) => ({
     slug,
   }));
 }
