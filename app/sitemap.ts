@@ -13,6 +13,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/zh/brazil-slot-ditou",
     "/zh/brazil-slot-ditou/facebook",
     "/zh/brazil-slot-ditou/risk",
+    "/zh/markets",
+    "/zh/india-rummy-uac",
+    "/zh/indonesia-slot-gacor",
+    "/zh/philippines-jili-gcash",
+    "/zh/vietnam-tai-xiu-ads",
+    "/zh/bangladesh-betting-traffic",
     "/zh/about",
   ];
 
