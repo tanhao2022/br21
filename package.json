@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seo-audit": "tsx scripts/seo-audit.ts"
+    "seo-audit": "tsx scripts/seo-audit.ts",
+    "postdeploy-audit": "tsx scripts/postdeploy-audit.ts"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

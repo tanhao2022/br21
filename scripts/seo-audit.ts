@@ -42,6 +42,7 @@ interface AuditResult {
     covered: number;
     coverageRate: number;
     missing: string[];
+    excludedDynamicRoutes?: string[];
   };
   deadLinks: Array<{
     slug: string;

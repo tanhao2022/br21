@@ -26,24 +26,77 @@ export interface MDXContent {
   slug: string;
 }
 
-const contentDirectory = path.join(process.cwd(), "content");
+// 增强路径解析：支持多种构建环境
+// 注意：必须每次调用时动态解析，不能缓存，因为构建时工作目录可能不同
+function getContentDirectory(): string {
+  const cwd = process.cwd();
+  
+  // 尝试多个可能的路径（按优先级排序）
+  const possiblePaths = [
+    path.join(cwd, "content"), // 最常见情况
+    path.resolve(cwd, "content"), // 绝对路径
+    path.resolve(__dirname, "..", "..", "content"), // 编译后的相对路径
+    path.join(cwd, "..", "content"), // monorepo 子目录情况
+    path.resolve(process.cwd(), "content"), // 再次尝试绝对路径
+  ];
+
+  for (const dirPath of possiblePaths) {
+    if (fs.existsSync(dirPath)) {
+      // 构建时输出诊断信息
+      if (process.env.NODE_ENV === "production" || process.env.NEXT_PHASE === "phase-production-build") {
+        console.log(`[mdx] Content directory resolved to: ${dirPath}`);
+        console.log(`[mdx] Current working directory: ${cwd}`);
+      }
+      return dirPath;
+    }
+  }
+
+  // 如果都找不到，输出详细错误信息
+  const errorMsg = `[mdx] ERROR: Content directory not found. Tried paths: ${possiblePaths.join(", ")}`;
+  console.error(errorMsg);
+  console.error(`[mdx] Current working directory: ${cwd}`);
+  console.error(`[mdx] __dirname: ${__dirname}`);
+  
+  // 返回默认路径（用于错误提示）
+  return path.join(cwd, "content");
+}
 
 export function getMDXFiles(directory: string): string[] {
-  const dirPath = path.join(contentDirectory, directory);
+  // 每次调用时动态获取content目录，避免模块加载时的缓存问题
+  const contentDir = getContentDirectory();
+  const dirPath = path.join(contentDir, directory);
+  
+  // 构建时验证：如果目录不存在，输出警告
   if (!fs.existsSync(dirPath)) {
+    if (process.env.NODE_ENV === "production" || process.env.NEXT_PHASE === "phase-production-build") {
+      console.error(`[sitemap] ERROR: Content directory not found: ${dirPath}`);
+      console.error(`[sitemap] Current working directory: ${process.cwd()}`);
+      console.error(`[sitemap] Content directory resolved to: ${contentDir}`);
+      console.error(`[sitemap] Attempted full path: ${dirPath}`);
+    }
     return [];
   }
-  return fs
+  
+  const files = fs
     .readdirSync(dirPath)
     .filter((file) => file.endsWith(".mdx") || file.endsWith(".md"));
+  
+  // 构建时验证：输出文件数量（仅在构建时）
+  if (process.env.NODE_ENV === "production" || process.env.NEXT_PHASE === "phase-production-build") {
+    console.log(`[sitemap] Found ${files.length} MDX files in ${dirPath}`);
+  }
+  
+  return files;
 }
 
 export function getMDXContent(
   directory: string,
   slug: string
 ): MDXContent | null {
-  const filePath = path.join(contentDirectory, directory, `${slug}.mdx`);
-  const mdPath = path.join(contentDirectory, directory, `${slug}.md`);
+  // 使用动态获取的 contentDirectory（而不是旧的常量）
+  const currentContentDir = getContentDirectory();
+  const filePath = path.join(currentContentDir, directory, `${slug}.mdx`);
+  const mdPath = path.join(currentContentDir, directory, `${slug}.md`);
 
   let fullPath: string;
   if (fs.existsSync(filePath)) {
