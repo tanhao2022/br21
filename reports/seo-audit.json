@@ -1,0 +1,565 @@
+{
+  "timestamp": "2026-01-20T05:24:35.737Z",
+  "mdxStats": {
+    "total": 107,
+    "slugs": [
+      "brazil-facebook-fangliang",
+      "brazil-facebook-fenghao",
+      "brazil-google-fangliang",
+      "brazil-google-fenghao",
+      "brazil-kreative-hegui",
+      "brazil-pix-chenggonglv",
+      "brazil-pix-fengkong",
+      "brazil-pix-huituan",
+      "brazil-pix-slot",
+      "brazil-pwa-fangfeng",
+      "brazil-pwa-slot",
+      "brazil-slot-buzhuanhua",
+      "brazil-slot-capi-buzhun",
+      "brazil-slot-capi",
+      "brazil-slot-cpm-gao",
+      "brazil-slot-ctr-di",
+      "brazil-slot-ditou",
+      "brazil-slot-facebook",
+      "brazil-slot-fangfeng",
+      "brazil-slot-fangliang",
+      "brazil-slot-fenghao",
+      "brazil-slot-google",
+      "brazil-slot-huituan",
+      "brazil-slot-lp-youhua",
+      "brazil-slot-remarketing",
+      "brazil-slot-roi-di",
+      "brazil-slot-shuju-duiqi",
+      "brazil-slot-zhuanhua-lujing",
+      "brazil",
+      "facebook-capi-huituan",
+      "facebook-slot-fenghao",
+      "google-slot-fenghao",
+      "igaming-ditou",
+      "india-google-uac",
+      "india-paytm-slot",
+      "india-remarketing",
+      "india-rummy-ditou",
+      "india-rummy-fangliang",
+      "india-rummy-fenghao",
+      "india-rummy-huituan",
+      "india-rummy-lp-youhua",
+      "india-rummy-roi-di",
+      "india-rummy-uac",
+      "india-slot-ditou",
+      "india-slot-facebook",
+      "india-slot-google",
+      "india-upi-slot",
+      "india",
+      "indonesia-dana-huituan",
+      "indonesia-dana-slot",
+      "indonesia-facebook-fenghao",
+      "indonesia-gopay-slot",
+      "indonesia-ovo-slot",
+      "indonesia-slot-buzhuanhua",
+      "indonesia-slot-ditou",
+      "indonesia-slot-facebook",
+      "indonesia-slot-fangfeng",
+      "indonesia-slot-fangliang",
+      "indonesia-slot-fenghao",
+      "indonesia-slot-gacor-hari-ini",
+      "indonesia-slot-gacor-maxwin",
+      "indonesia-slot-gacor-scatter",
+      "indonesia-slot-gacor",
+      "indonesia-slot-huituan",
+      "indonesia-slot-roi-di",
+      "indonesia",
+      "laohuji-ditou",
+      "philippines-capi-huituan",
+      "philippines-facebook-fangliang",
+      "philippines-facebook-fenghao",
+      "philippines-fc-slot",
+      "philippines-gcash-chenggonglv",
+      "philippines-gcash-huituan",
+      "philippines-gcash-slot",
+      "philippines-google-fangliang",
+      "philippines-google-fenghao",
+      "philippines-jili-gcash",
+      "philippines-jili-slot",
+      "philippines-lp-youhua",
+      "philippines-maya-huituan",
+      "philippines-maya-slot",
+      "philippines-messenger-funnel",
+      "philippines-private-domain",
+      "philippines-pwa-slot",
+      "philippines-remarketing",
+      "philippines-slot-buzhuanhua",
+      "philippines-slot-ditou",
+      "philippines-slot-facebook",
+      "philippines-slot-fangfeng",
+      "philippines-slot-google",
+      "philippines-slot-huituan",
+      "philippines-slot-pao-liang",
+      "philippines-slot-roi-di",
+      "philippines",
+      "pwa-slot-ditou",
+      "pwa-slot-huituan",
+      "slot-capi",
+      "slot-ditou",
+      "slot-facebook-ditou",
+      "slot-fangliang",
+      "slot-fenghao",
+      "slot-google-ditou",
+      "slot-huituan-buzhun",
+      "slot-huituan",
+      "slot-roi-di",
+      "vietnam-tai-xiu-ads",
+      "zhenjin-slot-ditou"
+    ]
+  },
+  "routeCoverage": {
+    "totalRoutes": 111,
+    "coveredRoutes": 107,
+    "missingMdx": [
+      "blog/[slug]"
+    ],
+    "orphanMdx": []
+  },
+  "frontmatterCheck": {
+    "total": 107,
+    "passed": 107,
+    "failed": []
+  },
+  "canonicalCoverage": {
+    "total": 107,
+    "covered": 107,
+    "coverageRate": 100,
+    "missing": [],
+    "excludedDynamicRoutes": [
+      "blog/[slug]"
+    ]
+  },
+  "deadLinks": [],
+  "similarity": {
+    "titles": [
+      {
+        "slug1": "brazil-pix-slot",
+        "slug2": "brazil-slot-buzhuanhua",
+        "similarity": 0.99,
+        "title1": "巴西PIX Slot代投 | PIX支付掉单优化 | BR21",
+        "title2": "巴西Slot不转化代投 | 转化率提升 PIX支付优化 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-fangfeng",
+        "slug2": "indonesia-slot-fenghao",
+        "similarity": 0.99,
+        "title1": "巴西Slot防封代投 | 二不限账户 Cloaking技术 | BR21",
+        "title2": "印尼Slot封号代投 | 二不限账户+Cloaking技术 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-fangliang",
+        "slug2": "brazil-slot-huituan",
+        "similarity": 0.99,
+        "title1": "巴西Slot防量代投 | 拦截无效流量 | BR21",
+        "title2": "巴西Slot回团代投 | 提升用户留存与复购 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-fangliang",
+        "slug2": "brazil-slot-remarketing",
+        "similarity": 0.99,
+        "title1": "巴西Slot防量代投 | 拦截无效流量 | BR21",
+        "title2": "巴西Slot再营销代投 | 再营销优化 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-fangliang",
+        "slug2": "indonesia-slot-buzhuanhua",
+        "similarity": 0.99,
+        "title1": "巴西Slot防量代投 | 拦截无效流量 | BR21",
+        "title2": "印尼Slot不转化代投 | 转化优化 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-fangliang",
+        "slug2": "indonesia-slot-fangfeng",
+        "similarity": 0.99,
+        "title1": "巴西Slot防量代投 | 拦截无效流量 | BR21",
+        "title2": "印尼Slot防封代投 | 防封策略 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-fangliang",
+        "slug2": "laohuji-ditou",
+        "similarity": 0.99,
+        "title1": "巴西Slot防量代投 | 拦截无效流量 | BR21",
+        "title2": "老虎机代投服务 | Slot代投 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-fangliang",
+        "slug2": "philippines-slot-buzhuanhua",
+        "similarity": 0.99,
+        "title1": "巴西Slot防量代投 | 拦截无效流量 | BR21",
+        "title2": "菲律宾Slot不转化代投 | 转化优化 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-fangliang",
+        "slug2": "philippines-slot-fangfeng",
+        "similarity": 0.99,
+        "title1": "巴西Slot防量代投 | 拦截无效流量 | BR21",
+        "title2": "菲律宾Slot防封代投 | 防封策略 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-fangliang",
+        "slug2": "philippines-slot-pao-liang",
+        "similarity": 0.99,
+        "title1": "巴西Slot防量代投 | 拦截无效流量 | BR21",
+        "title2": "菲律宾Slot跑量代投 | 规模化投放策略 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-fangliang",
+        "slug2": "zhenjin-slot-ditou",
+        "similarity": 0.99,
+        "title1": "巴西Slot防量代投 | 拦截无效流量 | BR21",
+        "title2": "真金Slot代投 | 真金游戏广告投放 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-google",
+        "slug2": "india-slot-google",
+        "similarity": 0.99,
+        "title1": "巴西SlotGoogle代投 | 专业投放服务 | BR21",
+        "title2": "印度SlotGoogle代投 | 专业投放服务 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-google",
+        "slug2": "philippines-slot-google",
+        "similarity": 0.99,
+        "title1": "巴西SlotGoogle代投 | 专业投放服务 | BR21",
+        "title2": "菲律宾SlotGoogle代投 | 专业投放服务 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-huituan",
+        "slug2": "brazil-slot-remarketing",
+        "similarity": 0.99,
+        "title1": "巴西Slot回团代投 | 提升用户留存与复购 | BR21",
+        "title2": "巴西Slot再营销代投 | 再营销优化 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-huituan",
+        "slug2": "indonesia-slot-buzhuanhua",
+        "similarity": 0.99,
+        "title1": "巴西Slot回团代投 | 提升用户留存与复购 | BR21",
+        "title2": "印尼Slot不转化代投 | 转化优化 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-huituan",
+        "slug2": "indonesia-slot-fangfeng",
+        "similarity": 0.99,
+        "title1": "巴西Slot回团代投 | 提升用户留存与复购 | BR21",
+        "title2": "印尼Slot防封代投 | 防封策略 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-huituan",
+        "slug2": "laohuji-ditou",
+        "similarity": 0.99,
+        "title1": "巴西Slot回团代投 | 提升用户留存与复购 | BR21",
+        "title2": "老虎机代投服务 | Slot代投 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-huituan",
+        "slug2": "philippines-slot-buzhuanhua",
+        "similarity": 0.99,
+        "title1": "巴西Slot回团代投 | 提升用户留存与复购 | BR21",
+        "title2": "菲律宾Slot不转化代投 | 转化优化 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-huituan",
+        "slug2": "philippines-slot-fangfeng",
+        "similarity": 0.99,
+        "title1": "巴西Slot回团代投 | 提升用户留存与复购 | BR21",
+        "title2": "菲律宾Slot防封代投 | 防封策略 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-huituan",
+        "slug2": "philippines-slot-pao-liang",
+        "similarity": 0.99,
+        "title1": "巴西Slot回团代投 | 提升用户留存与复购 | BR21",
+        "title2": "菲律宾Slot跑量代投 | 规模化投放策略 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-huituan",
+        "slug2": "zhenjin-slot-ditou",
+        "similarity": 0.99,
+        "title1": "巴西Slot回团代投 | 提升用户留存与复购 | BR21",
+        "title2": "真金Slot代投 | 真金游戏广告投放 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-remarketing",
+        "slug2": "indonesia-slot-buzhuanhua",
+        "similarity": 0.99,
+        "title1": "巴西Slot再营销代投 | 再营销优化 | BR21",
+        "title2": "印尼Slot不转化代投 | 转化优化 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-remarketing",
+        "slug2": "indonesia-slot-fangfeng",
+        "similarity": 0.99,
+        "title1": "巴西Slot再营销代投 | 再营销优化 | BR21",
+        "title2": "印尼Slot防封代投 | 防封策略 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-remarketing",
+        "slug2": "laohuji-ditou",
+        "similarity": 0.99,
+        "title1": "巴西Slot再营销代投 | 再营销优化 | BR21",
+        "title2": "老虎机代投服务 | Slot代投 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-remarketing",
+        "slug2": "philippines-slot-buzhuanhua",
+        "similarity": 0.99,
+        "title1": "巴西Slot再营销代投 | 再营销优化 | BR21",
+        "title2": "菲律宾Slot不转化代投 | 转化优化 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-remarketing",
+        "slug2": "philippines-slot-fangfeng",
+        "similarity": 0.99,
+        "title1": "巴西Slot再营销代投 | 再营销优化 | BR21",
+        "title2": "菲律宾Slot防封代投 | 防封策略 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-remarketing",
+        "slug2": "philippines-slot-pao-liang",
+        "similarity": 0.99,
+        "title1": "巴西Slot再营销代投 | 再营销优化 | BR21",
+        "title2": "菲律宾Slot跑量代投 | 规模化投放策略 | BR21"
+      },
+      {
+        "slug1": "brazil-slot-remarketing",
+        "slug2": "zhenjin-slot-ditou",
+        "similarity": 0.99,
+        "title1": "巴西Slot再营销代投 | 再营销优化 | BR21",
+        "title2": "真金Slot代投 | 真金游戏广告投放 | BR21"
+      },
+      {
+        "slug1": "brazil",
+        "slug2": "india-remarketing",
+        "similarity": 0.99,
+        "title1": "巴西老虎机代投 | 市场总览与投放解决方案 | BR21",
+        "title2": "印度再营销代投 | 再营销优化 | BR21"
+      },
+      {
+        "slug1": "brazil",
+        "slug2": "india",
+        "similarity": 0.99,
+        "title1": "巴西老虎机代投 | 市场总览与投放解决方案 | BR21",
+        "title2": "印度老虎机代投 | 市场总览与投放解决方案 | BR21"
+      }
+    ],
+    "descriptions": [
+      {
+        "slug1": "brazil-google-fangliang",
+        "slug2": "philippines-google-fangliang",
+        "similarity": 1,
+        "desc1": "专注巴西Google防量流量过滤的代投服务。通过多层过滤机制，拦截无效流量，提升真实转化率。",
+        "desc2": "专注菲律宾Google防量流量过滤的代投服务。通过多层过滤机制，拦截无效流量，提升真实转化率。"
+      },
+      {
+        "slug1": "brazil-google-fenghao",
+        "slug2": "philippines-google-fenghao",
+        "similarity": 1,
+        "desc1": "专注巴西Google封号封号防护的代投服务。提供二不限白名单账户、Cloaking 3.0技术，将账户存活周期延长3-5倍。",
+        "desc2": "专注菲律宾Google封号封号防护的代投服务。提供二不限白名单账户、Cloaking 3.0技术，将账户存活周期延长3-5倍。"
+      },
+      {
+        "slug1": "brazil-slot-buzhuanhua",
+        "slug2": "indonesia-slot-buzhuanhua",
+        "similarity": 1,
+        "desc1": "专注巴西Slot不转化转化优化的代投服务。通过漏斗分析、转化路径优化，将转化率提升25%-45%。",
+        "desc2": "专注印尼Slot不转化转化优化的代投服务。通过漏斗分析、转化路径优化，将转化率提升25%-45%。"
+      },
+      {
+        "slug1": "brazil-slot-buzhuanhua",
+        "slug2": "philippines-slot-buzhuanhua",
+        "similarity": 1,
+        "desc1": "专注巴西Slot不转化转化优化的代投服务。通过漏斗分析、转化路径优化，将转化率提升25%-45%。",
+        "desc2": "专注菲律宾Slot不转化转化优化的代投服务。通过漏斗分析、转化路径优化，将转化率提升25%-45%。"
+      },
+      {
+        "slug1": "brazil-slot-fangfeng",
+        "slug2": "indonesia-slot-fangfeng",
+        "similarity": 1,
+        "desc1": "专注巴西Slot防封防封的代投服务。提供账户保护、风控策略、Cloaking技术，确保账户稳定运行。",
+        "desc2": "专注印尼Slot防封防封的代投服务。提供账户保护、风控策略、Cloaking技术，确保账户稳定运行。"
+      },
+      {
+        "slug1": "brazil-slot-fangfeng",
+        "slug2": "philippines-slot-fangfeng",
+        "similarity": 1,
+        "desc1": "专注巴西Slot防封防封的代投服务。提供账户保护、风控策略、Cloaking技术，确保账户稳定运行。",
+        "desc2": "专注菲律宾Slot防封防封的代投服务。提供账户保护、风控策略、Cloaking技术，确保账户稳定运行。"
+      },
+      {
+        "slug1": "brazil-slot-fenghao",
+        "slug2": "indonesia-slot-fenghao",
+        "similarity": 1,
+        "desc1": "专注巴西Slot封号防护的代投服务。提供二不限、三不限白名单账户，抗封能力比普通账户强300%以上。配合Cloaking 3.0技术，完美规避FB审核爬虫。承诺账户被封，余额无损退回。",
+        "desc2": "专注印尼Slot封号防护的代投服务。提供二不限、三不限白名单账户，抗封能力比普通账户强300%以上。配合Cloaking 3.0技术，完美规避FB审核爬虫。承诺账户被封，余额无损退回。"
+      },
+      {
+        "slug1": "brazil-slot-google",
+        "slug2": "india-slot-google",
+        "similarity": 1,
+        "desc1": "专注巴西SlotGoogle的代投服务。提供专业的广告投放、素材制作、数据优化一站式解决方案。",
+        "desc2": "专注印度SlotGoogle的代投服务。提供专业的广告投放、素材制作、数据优化一站式解决方案。"
+      },
+      {
+        "slug1": "brazil-slot-google",
+        "slug2": "philippines-slot-google",
+        "similarity": 1,
+        "desc1": "专注巴西SlotGoogle的代投服务。提供专业的广告投放、素材制作、数据优化一站式解决方案。",
+        "desc2": "专注菲律宾SlotGoogle的代投服务。提供专业的广告投放、素材制作、数据优化一站式解决方案。"
+      },
+      {
+        "slug1": "india-remarketing",
+        "slug2": "philippines-remarketing",
+        "similarity": 1,
+        "desc1": "专注印度再营销再营销的代投服务。通过用户召回、复购优化，将LTV提升30%-50%。",
+        "desc2": "专注菲律宾再营销再营销的代投服务。通过用户召回、复购优化，将LTV提升30%-50%。"
+      },
+      {
+        "slug1": "india-slot-facebook",
+        "slug2": "indonesia-slot-facebook",
+        "similarity": 1,
+        "desc1": "专注印度SlotFacebook的代投服务。提供专业的广告投放、素材制作、数据优化一站式解决方案。",
+        "desc2": "专注印尼SlotFacebook的代投服务。提供专业的广告投放、素材制作、数据优化一站式解决方案。"
+      },
+      {
+        "slug1": "india-slot-facebook",
+        "slug2": "philippines-slot-facebook",
+        "similarity": 1,
+        "desc1": "专注印度SlotFacebook的代投服务。提供专业的广告投放、素材制作、数据优化一站式解决方案。",
+        "desc2": "专注菲律宾SlotFacebook的代投服务。提供专业的广告投放、素材制作、数据优化一站式解决方案。"
+      },
+      {
+        "slug1": "india-slot-google",
+        "slug2": "philippines-slot-google",
+        "similarity": 1,
+        "desc1": "专注印度SlotGoogle的代投服务。提供专业的广告投放、素材制作、数据优化一站式解决方案。",
+        "desc2": "专注菲律宾SlotGoogle的代投服务。提供专业的广告投放、素材制作、数据优化一站式解决方案。"
+      },
+      {
+        "slug1": "indonesia-slot-buzhuanhua",
+        "slug2": "philippines-slot-buzhuanhua",
+        "similarity": 1,
+        "desc1": "专注印尼Slot不转化转化优化的代投服务。通过漏斗分析、转化路径优化，将转化率提升25%-45%。",
+        "desc2": "专注菲律宾Slot不转化转化优化的代投服务。通过漏斗分析、转化路径优化，将转化率提升25%-45%。"
+      },
+      {
+        "slug1": "indonesia-slot-facebook",
+        "slug2": "philippines-slot-facebook",
+        "similarity": 1,
+        "desc1": "专注印尼SlotFacebook的代投服务。提供专业的广告投放、素材制作、数据优化一站式解决方案。",
+        "desc2": "专注菲律宾SlotFacebook的代投服务。提供专业的广告投放、素材制作、数据优化一站式解决方案。"
+      },
+      {
+        "slug1": "indonesia-slot-fangfeng",
+        "slug2": "philippines-slot-fangfeng",
+        "similarity": 1,
+        "desc1": "专注印尼Slot防封防封的代投服务。提供账户保护、风控策略、Cloaking技术，确保账户稳定运行。",
+        "desc2": "专注菲律宾Slot防封防封的代投服务。提供账户保护、风控策略、Cloaking技术，确保账户稳定运行。"
+      },
+      {
+        "slug1": "laohuji-ditou",
+        "slug2": "slot-ditou",
+        "similarity": 1,
+        "desc1": "老虎机代投是Slot代投的另一种表述方式，指专业的Slot类项目广告代投服务。覆盖Facebook、Google、TikTok全平台，解决封户、CPA过高、掉单率高等痛点。提供开户、素材制作、落地页优化一站式解决方案。",
+        "desc2": "专业的Slot类项目广告代投服务。覆盖Facebook、Google、TikTok全平台，解决封户、CPA过高、掉单率高等痛点。提供开户、素材制作、落地页优化一站式解决方案。"
+      },
+      {
+        "slug1": "brazil-slot-huituan",
+        "slug2": "philippines-gcash-huituan",
+        "similarity": 0.83,
+        "desc1": "专注巴西Slot回团优化的代投服务。通过Messenger Bot、推送通知、召回活动，提升用户留存率和复购率。Day-7留存率提升至35%-50%，用户复购率提升30%-50%，LTV提升40%-60%。",
+        "desc2": "专注菲律宾GCash回团优化的代投服务。通过Messenger Bot、推送通知、召回活动，提升用户留存率和复购率。Day-7留存率提升至35%-50%，用户复购率提升30%-50%，LTV提升40%-60%。"
+      },
+      {
+        "slug1": "brazil-slot-facebook",
+        "slug2": "slot-facebook-ditou",
+        "similarity": 0.77,
+        "desc1": "专注巴西Slot Facebook/Instagram广告代投。提供二不限白名单账户、葡语本地化素材、Cloaking 3.0技术。解决封户、CPA过高、域名屏蔽问题。CTR稳定1.5%-3.0%，ROI稳定在150%-250%。",
+        "desc2": "专业的Slot类项目Facebook/Instagram广告代投服务。提供二不限白名单账户、本地化素材制作、Cloaking技术，解决封户和CPA过高问题。CTR稳定1.5%-3.0%，3天起量。"
+      },
+      {
+        "slug1": "brazil-pix-huituan",
+        "slug2": "philippines-capi-huituan",
+        "similarity": 0.75,
+        "desc1": "专注巴西PIX回团（回传）优化的代投服务。解决PIX支付掉单、Facebook CAPI回传延迟、不准确的问题，通过实时数据对齐技术，将回传准确率提升至95%以上。",
+        "desc2": "专注菲律宾CAPI回团回团（回传）优化的代投服务。解决Facebook CAPI回传延迟、不准确的问题，通过实时数据对齐技术，将回传准确率提升至95%以上。"
+      },
+      {
+        "slug1": "brazil-slot-remarketing",
+        "slug2": "india-remarketing",
+        "similarity": 0.75,
+        "desc1": "专注巴西Slot再营销再营销的代投服务。通过用户召回、复购优化，将LTV提升30%-50%。",
+        "desc2": "专注印度再营销再营销的代投服务。通过用户召回、复购优化，将LTV提升30%-50%。"
+      },
+      {
+        "slug1": "brazil-slot-remarketing",
+        "slug2": "philippines-remarketing",
+        "similarity": 0.75,
+        "desc1": "专注巴西Slot再营销再营销的代投服务。通过用户召回、复购优化，将LTV提升30%-50%。",
+        "desc2": "专注菲律宾再营销再营销的代投服务。通过用户召回、复购优化，将LTV提升30%-50%。"
+      },
+      {
+        "slug1": "facebook-capi-huituan",
+        "slug2": "philippines-capi-huituan",
+        "similarity": 0.75,
+        "desc1": "专注FacebookCAPI回团回团（回传）优化的代投服务。解决Facebook CAPI回传延迟、不准确的问题，通过实时数据对齐技术，将回传准确率提升至95%以上。",
+        "desc2": "专注菲律宾CAPI回团回团（回传）优化的代投服务。解决Facebook CAPI回传延迟、不准确的问题，通过实时数据对齐技术，将回传准确率提升至95%以上。"
+      },
+      {
+        "slug1": "india-rummy-huituan",
+        "slug2": "philippines-capi-huituan",
+        "similarity": 0.75,
+        "desc1": "专注印度Rummy回团回团（回传）优化的代投服务。解决Facebook CAPI回传延迟、不准确的问题，通过实时数据对齐技术，将回传准确率提升至95%以上。",
+        "desc2": "专注菲律宾CAPI回团回团（回传）优化的代投服务。解决Facebook CAPI回传延迟、不准确的问题，通过实时数据对齐技术，将回传准确率提升至95%以上。"
+      },
+      {
+        "slug1": "indonesia-dana-huituan",
+        "slug2": "philippines-capi-huituan",
+        "similarity": 0.75,
+        "desc1": "专注印尼Dana回团回团（回传）优化的代投服务。解决Facebook CAPI回传延迟、不准确的问题，通过实时数据对齐技术，将回传准确率提升至95%以上。",
+        "desc2": "专注菲律宾CAPI回团回团（回传）优化的代投服务。解决Facebook CAPI回传延迟、不准确的问题，通过实时数据对齐技术，将回传准确率提升至95%以上。"
+      },
+      {
+        "slug1": "philippines-capi-huituan",
+        "slug2": "philippines-maya-huituan",
+        "similarity": 0.75,
+        "desc1": "专注菲律宾CAPI回团回团（回传）优化的代投服务。解决Facebook CAPI回传延迟、不准确的问题，通过实时数据对齐技术，将回传准确率提升至95%以上。",
+        "desc2": "专注菲律宾Maya回团回团（回传）优化的代投服务。解决Facebook CAPI回传延迟、不准确的问题，通过实时数据对齐技术，将回传准确率提升至95%以上。"
+      },
+      {
+        "slug1": "philippines-capi-huituan",
+        "slug2": "pwa-slot-huituan",
+        "similarity": 0.75,
+        "desc1": "专注菲律宾CAPI回团回团（回传）优化的代投服务。解决Facebook CAPI回传延迟、不准确的问题，通过实时数据对齐技术，将回传准确率提升至95%以上。",
+        "desc2": "专注PWASlot回团回团（回传）优化的代投服务。解决Facebook CAPI回传延迟、不准确的问题，通过实时数据对齐技术，将回传准确率提升至95%以上。"
+      },
+      {
+        "slug1": "brazil-google-fenghao",
+        "slug2": "slot-fenghao",
+        "similarity": 0.71,
+        "desc1": "专注巴西Google封号封号防护的代投服务。提供二不限白名单账户、Cloaking 3.0技术，将账户存活周期延长3-5倍。",
+        "desc2": "专注Slot封号防护的代投服务。提供Facebook二不限白名单账户、Google广告账户保护、Cloaking 3.0技术，将账户存活周期延长3-5倍。"
+      },
+      {
+        "slug1": "philippines-google-fenghao",
+        "slug2": "slot-fenghao",
+        "similarity": 0.71,
+        "desc1": "专注菲律宾Google封号封号防护的代投服务。提供二不限白名单账户、Cloaking 3.0技术，将账户存活周期延长3-5倍。",
+        "desc2": "专注Slot封号防护的代投服务。提供Facebook二不限白名单账户、Google广告账户保护、Cloaking 3.0技术，将账户存活周期延长3-5倍。"
+      },
+      {
+        "slug1": "brazil-pwa-slot",
+        "slug2": "pwa-slot-ditou",
+        "similarity": 0.7,
+        "desc1": "专注巴西PWA（Progressive Web App）Slot代投服务。无需上架Google Play，规避审核风险，永不下架。用户体验与原生APP相同，支持离线功能。投放审核通过率高，ROI稳定在150%-250%。",
+        "desc2": "PWA（Progressive Web App）技术应用于Slot代投，规避Google Play审核，永不下架。用户体验与原生APP相同，支持离线功能，投放审核通过率高。提供PWA开发、优化、代投一站式服务。"
+      }
+    ]
+  },
+  "exactDuplicateTitles": []
+}

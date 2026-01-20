@@ -5,7 +5,7 @@ import matter from "gray-matter";
 export interface MDXFrontMatter {
   title: string;
   description: string;
-  keywords?: string;
+  keywords?: string | string[];
   quickAnswer?: string;
   keyPoints?: string[];
   process?: Array<{ title: string; description: string }>;
@@ -14,6 +14,10 @@ export interface MDXFrontMatter {
   date?: string;
   category?: string;
   tags?: string[];
+  // ServicePage 模板所需字段
+  country?: string;
+  serviceType?: string;
+  countrySlug?: string; // 用于生成国家页面内链，如 "brazil-slot-ditou"
 }
 
 export interface MDXContent {

@@ -16,7 +16,6 @@ const marketSolutions = {
     { name: "印尼", href: "/zh/indonesia-slot-gacor", flag: "🇮🇩", hot: true },
     { name: "菲律宾", href: "/zh/philippines-jili-gcash", flag: "🇵🇭", hot: true },
     { name: "越南", href: "/zh/vietnam-tai-xiu-ads", flag: "🇻🇳", hot: true },
-    { name: "孟加拉", href: "/zh/bangladesh-betting-traffic", flag: "🇧🇩", hot: false },
   ],
   "非洲市场": [
     { name: "尼日利亚", href: "/zh/nigeria-slot-ads", flag: "🇳🇬", hot: false },

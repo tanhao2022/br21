@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { getMDXContent, getRelatedPosts } from "@/lib/utils/mdx";
+import { generateServiceMetadata } from "@/lib/utils/metadata";
 import ArticleLayout from "@/components/ArticleLayout";
 import {
   generateServiceSchema,
@@ -19,22 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
     };
   }
 
-  return {
-    title: data.frontMatter.title,
-    description: data.frontMatter.description,
-    keywords: data.frontMatter.keywords,
-    openGraph: {
-      title: data.frontMatter.title,
-      description: data.frontMatter.description,
-      type: "article",
-      locale: "zh_CN",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: data.frontMatter.title,
-      description: data.frontMatter.description,
-    },
-  };
+  return generateServiceMetadata(data.frontMatter, "vietnam-tai-xiu-ads");
 }
 
 export default async function VietnamTaiXiuAdsPage() {

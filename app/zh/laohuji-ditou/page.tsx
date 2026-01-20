@@ -1,10 +1,20 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { generateServiceMetadata } from "@/lib/utils/metadata";
 
-export const metadata: Metadata = {
-  title: "老虎机代投",
-  description: "专业的老虎机代投服务，提供完整的广告投放解决方案",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return generateServiceMetadata(
+    {
+      title: "老虎机代投",
+      description: "专业的老虎机代投服务，提供完整的广告投放解决方案",
+      keywords: ["老虎机代投", "Slot代投", "广告投放", "全球代投"],
+      country: "Global",
+      countrySlug: "global",
+      serviceType: "老虎机代投",
+    },
+    "laohuji-ditou"
+  );
+}
 
 export default function LaohujiDitouPage() {
   return (
