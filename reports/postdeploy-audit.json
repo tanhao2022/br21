@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-20T06:30:59.140Z",
+  "timestamp": "2026-01-20T12:48:56.183Z",
   "baseUrl": "https://www.br21.com",
   "robots": {
     "status": "PASS",
@@ -11,7 +11,7 @@
   "sitemap": {
     "status": "PASS",
     "statusCode": 200,
-    "urlCount": 23,
+    "urlCount": 120,
     "sampleUrls": [
       "https://www.br21.com",
       "https://www.br21.com/zh",
@@ -21,7 +21,7 @@
     ]
   },
   "criticalUrls": {
-    "status": "FAIL",
+    "status": "PASS",
     "checked": [
       {
         "path": "/zh/slot-ditou",
@@ -30,22 +30,22 @@
       },
       {
         "path": "/zh/brazil",
-        "statusCode": 404,
+        "statusCode": 200,
         "finalUrl": "https://www.br21.com/zh/brazil/"
       },
       {
         "path": "/zh/philippines",
-        "statusCode": 404,
+        "statusCode": 200,
         "finalUrl": "https://www.br21.com/zh/philippines/"
       },
       {
         "path": "/zh/indonesia",
-        "statusCode": 404,
+        "statusCode": 200,
         "finalUrl": "https://www.br21.com/zh/indonesia/"
       },
       {
         "path": "/zh/india",
-        "statusCode": 404,
+        "statusCode": 200,
         "finalUrl": "https://www.br21.com/zh/india/"
       },
       {
@@ -55,35 +55,26 @@
       },
       {
         "path": "/zh/philippines-slot-ditou",
-        "statusCode": 404,
+        "statusCode": 200,
         "finalUrl": "https://www.br21.com/zh/philippines-slot-ditou/"
       },
       {
         "path": "/zh/indonesia-slot-ditou",
-        "statusCode": 404,
+        "statusCode": 200,
         "finalUrl": "https://www.br21.com/zh/indonesia-slot-ditou/"
       },
       {
         "path": "/zh/india-rummy-ditou",
-        "statusCode": 404,
+        "statusCode": 200,
         "finalUrl": "https://www.br21.com/zh/india-rummy-ditou/"
       },
       {
         "path": "/zh/slot-capi",
-        "statusCode": 404,
+        "statusCode": 200,
         "finalUrl": "https://www.br21.com/zh/slot-capi/"
       }
     ],
-    "failed": [
-      "/zh/brazil",
-      "/zh/philippines",
-      "/zh/indonesia",
-      "/zh/india",
-      "/zh/philippines-slot-ditou",
-      "/zh/indonesia-slot-ditou",
-      "/zh/india-rummy-ditou",
-      "/zh/slot-capi"
-    ]
+    "failed": []
   },
   "canonical": {
     "status": "FAIL",
@@ -91,26 +82,28 @@
       {
         "path": "/zh/brazil-slot-ditou",
         "expected": "https://www.br21.com/zh/brazil-slot-ditou",
-        "actual": "https://www.br21.com/",
+        "actual": "https://www.br21.com/zh/brazil-slot-ditou/",
         "status": "FAIL",
-        "error": "Canonical mismatch: expected https://www.br21.com/zh/brazil-slot-ditou, got https://www.br21.com/"
+        "error": "Canonical mismatch: expected https://www.br21.com/zh/brazil-slot-ditou, got https://www.br21.com/zh/brazil-slot-ditou/"
       },
       {
         "path": "/zh/philippines-slot-ditou",
         "expected": "https://www.br21.com/zh/philippines-slot-ditou",
+        "actual": "https://www.br21.com/zh/philippines-slot-ditou/",
         "status": "FAIL",
-        "error": "Status 404 or no body"
+        "error": "Canonical mismatch: expected https://www.br21.com/zh/philippines-slot-ditou, got https://www.br21.com/zh/philippines-slot-ditou/"
       },
       {
         "path": "/zh/slot-capi",
         "expected": "https://www.br21.com/zh/slot-capi",
+        "actual": "https://www.br21.com/zh/slot-capi/",
         "status": "FAIL",
-        "error": "Status 404 or no body"
+        "error": "Canonical mismatch: expected https://www.br21.com/zh/slot-capi, got https://www.br21.com/zh/slot-capi/"
       }
     ]
   },
   "jsonLd": {
-    "status": "FAIL",
+    "status": "PASS",
     "checked": [
       {
         "path": "/zh/brazil-slot-ditou",
@@ -120,17 +113,15 @@
       },
       {
         "path": "/zh/philippines-slot-ditou",
-        "hasJsonLd": false,
-        "hasServiceSchema": false,
-        "hasFaqSchema": false,
-        "error": "Status 404 or no body"
+        "hasJsonLd": true,
+        "hasServiceSchema": true,
+        "hasFaqSchema": true
       },
       {
         "path": "/zh/slot-capi",
-        "hasJsonLd": false,
-        "hasServiceSchema": false,
-        "hasFaqSchema": false,
-        "error": "Status 404 or no body"
+        "hasJsonLd": true,
+        "hasServiceSchema": true,
+        "hasFaqSchema": true
       }
     ]
   },
@@ -155,7 +146,6 @@
   "overall": {
     "status": "FAIL",
     "fatalIssues": [
-      "关键URL失败: 8 个",
       "canonical检查失败"
     ]
   }

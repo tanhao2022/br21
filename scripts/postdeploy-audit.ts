@@ -367,6 +367,7 @@ async function checkCriticalUrls(
 }
 
 // 工具函数：检查canonical
+// 注意：URL会通过308重定向到带尾斜杠的版本，expected应该是最终URL（带尾斜杠）
 async function checkCanonical(
   baseUrl: string,
   paths: string[]
@@ -375,19 +376,30 @@ async function checkCanonical(
 
   for (const path of paths) {
     try {
-      const url = `${baseUrl}${path}`;
-      const expected = url;
-      const result = await fetchWithRedirects(url);
+      // 请求不带尾斜杠的URL（会触发308重定向到带尾斜杠版本）
+      const initialUrl = `${baseUrl}${path}`;
+      const result = await fetchWithRedirects(initialUrl);
 
       if (result.statusCode !== 200 || !result.body) {
         checked.push({
           path,
-          expected,
+          expected: result.finalUrl || initialUrl,
           status: "FAIL",
           error: `Status ${result.statusCode} or no body`,
         });
         continue;
       }
+
+      // 最终URL（带尾斜杠）作为expected
+      // 规范化：确保URL格式一致（去除查询参数和hash，统一尾斜杠）
+      const finalUrl = new URL(result.finalUrl);
+      finalUrl.search = "";
+      finalUrl.hash = "";
+      // 确保路径以/结尾（符合308重定向规范）
+      if (!finalUrl.pathname.endsWith("/") && finalUrl.pathname !== "/") {
+        finalUrl.pathname = `${finalUrl.pathname}/`;
+      }
+      const expected = finalUrl.href;
 
       // 提取canonical
       const canonicalMatch = result.body.match(
@@ -405,31 +417,44 @@ async function checkCanonical(
       }
 
       const actual = canonicalMatch[1];
-      // 处理相对URL
-      const actualUrl = actual.startsWith("http")
-        ? actual
-        : new URL(actual, baseUrl).href;
+      // 处理相对URL，规范化
+      let actualUrl: string;
+      if (actual.startsWith("http")) {
+        actualUrl = actual;
+      } else {
+        actualUrl = new URL(actual, baseUrl).href;
+      }
 
-      if (actualUrl === expected) {
+      // 规范化actualUrl（去除查询参数和hash，统一尾斜杠）
+      const actualUrlObj = new URL(actualUrl);
+      actualUrlObj.search = "";
+      actualUrlObj.hash = "";
+      // 确保路径以/结尾
+      if (!actualUrlObj.pathname.endsWith("/") && actualUrlObj.pathname !== "/") {
+        actualUrlObj.pathname = `${actualUrlObj.pathname}/`;
+      }
+      const normalizedActual = actualUrlObj.href;
+
+      if (normalizedActual === expected) {
         checked.push({
           path,
           expected,
-          actual: actualUrl,
+          actual: normalizedActual,
           status: "PASS",
         });
       } else {
         checked.push({
           path,
           expected,
-          actual: actualUrl,
+          actual: normalizedActual,
           status: "FAIL",
-          error: `Canonical mismatch: expected ${expected}, got ${actualUrl}`,
+          error: `Canonical mismatch: expected ${expected}, got ${normalizedActual}`,
         });
       }
     } catch (error: any) {
       checked.push({
         path,
-        expected: `${baseUrl}${path}`,
+        expected: `${baseUrl}${path}/`,
         status: "FAIL",
         error: error.message || "Request failed",
       });
