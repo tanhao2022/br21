@@ -40,13 +40,20 @@ const synonymSentences = {
 };
 
 /**
- * 句子混洗器
- * 从同义句子库中随机选择一个句子，确保内容唯一性
+ * 句子混洗器（确定性版本）
+ * 从同义句子库中基于种子选择句子，确保相同输入产生相同输出
+ * 这对于 SSG 构建的确定性至关重要
+ * 
+ * @param key - 句子类型键
+ * @param seed - 种子字符串（用于确定性选择）
+ * @returns 选择的句子
  */
-function shuffleSentence(key: keyof typeof synonymSentences): string {
+function shuffleSentence(key: keyof typeof synonymSentences, seed: string): string {
   const sentences = synonymSentences[key];
-  const randomIndex = Math.floor(Math.random() * sentences.length);
-  return sentences[randomIndex];
+  // 使用种子生成确定性索引
+  const hash = simpleHash(`${key}-${seed}`);
+  const index = hash % sentences.length;
+  return sentences[index];
 }
 
 /**
@@ -74,7 +81,7 @@ export function generateDynamicIntro(
 
   switch (variation) {
     case 0: // Variation A: Regulatory Warning + Service Solution + CTA
-      intro = `${market.regulatoryContext} ${shuffleSentence("serviceSolution")} ${shuffleSentence("callToAction")}`;
+      intro = `${market.regulatoryContext} ${shuffleSentence("serviceSolution", seed)} ${shuffleSentence("callToAction", seed + "-cta")}`;
       break;
 
     case 1: // Variation B: Local Slang Hook + Tech Challenge + Success Data
@@ -82,11 +89,11 @@ export function generateDynamicIntro(
         market.localSlang[
           Math.floor((hash * 2) % market.localSlang.length)
         ];
-      intro = `在${market.nameZh}市场，玩家常用"${randomSlang}"来形容成功的游戏体验。${market.infrastructureChallenge} ${shuffleSentence("authorityStatement")}`;
+      intro = `在${market.nameZh}市场，玩家常用"${randomSlang}"来形容成功的游戏体验。${market.infrastructureChallenge} ${shuffleSentence("authorityStatement", seed)}`;
       break;
 
     case 2: // Variation C: Pain Point Question + Market Data + Authority
-      intro = `${shuffleSentence("painPointQuestion")} ${shuffleSentence("marketData")} ${shuffleSentence("authorityStatement")}`;
+      intro = `${shuffleSentence("painPointQuestion", seed)} ${shuffleSentence("marketData", seed + "-data")} ${shuffleSentence("authorityStatement", seed + "-auth")}`;
       break;
   }
 
