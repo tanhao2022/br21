@@ -1,48 +1,53 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { getAllMDXContent } from "@/lib/utils/mdx";
 
 export const metadata: Metadata = {
   title: "行业洞察",
   description: "BR21 专业团队分享 iGaming 市场趋势、技术解决方案和成功案例",
 };
 
-interface BlogPost {
-  slug: string;
-  title: string;
-  summary: string;
-  date: string;
-  category: string;
-  tag: string;
-}
-
-const blogPosts: BlogPost[] = [
-  {
-    slug: "2026-brazil-igaming-payment-report",
-    title: "2026 巴西 iGaming 支付报告：PIX 成功率分析",
-    summary: "深度分析巴西 PIX 支付在 slot 游戏中的失败原因及解决方案，包含真实数据与优化建议。",
-    date: "2026-01-22",
-    category: "市场趋势",
-    tag: "Market Report",
-  },
-  {
-    slug: "facebook-cloaking-3-0-solution",
-    title: "Facebook Cloaking 3.0：iGaming 广告防封技术详解",
-    summary: "揭秘企业级 Cloaking 技术原理，如何通过 IP 指纹识别与动态域名轮询实现 99%+ 过审率。",
-    date: "2026-01-20",
-    category: "技术方案",
-    tag: "Tech Solution",
-  },
-  {
-    slug: "india-rummy-uac-case-study",
-    title: "印度 Rummy 案例：如何通过 UAC 2.5 实现 500% ROI",
-    summary: "真实案例拆解：从 0 到日耗 $50K，印度 Rummy 市场如何通过 Google UAC 事件优化实现规模化增长。",
-    date: "2026-01-18",
-    category: "成功案例",
-    tag: "Case Study",
-  },
-];
+// 分类标签映射
+const categoryTagMap: Record<string, string> = {
+  "市场趋势": "Market Report",
+  "技术方案": "Tech Solution",
+  "成功案例": "Case Study",
+  "Technical": "Tech Solution",
+};
 
 export default function BlogPage() {
+  // 从 content/blog 目录自动读取所有文章
+  const allPosts = getAllMDXContent("blog");
+
+  // 按日期倒序排序（最新的在前）
+  const sortedPosts = allPosts.sort((a, b) => {
+    const dateA = a.frontMatter.date
+      ? new Date(a.frontMatter.date).getTime()
+      : 0;
+    const dateB = b.frontMatter.date
+      ? new Date(b.frontMatter.date).getTime()
+      : 0;
+    return dateB - dateA;
+  });
+
+  // 转换为显示格式
+  const blogPosts = sortedPosts.map((post) => {
+    const category = post.frontMatter.category || "未分类";
+    const tag = categoryTagMap[category] || "Article";
+    const summary =
+      post.frontMatter.description ||
+      post.frontMatter.quickAnswer ||
+      "专业团队分享 iGaming 市场趋势、技术解决方案和成功案例。";
+
+    return {
+      slug: post.slug,
+      title: post.frontMatter.title,
+      summary: summary.length > 150 ? summary.substring(0, 150) + "..." : summary,
+      date: post.frontMatter.date || new Date().toISOString(),
+      category: category,
+      tag: tag,
+    };
+  });
   return (
     <div className="mx-auto max-w-7xl px-4 py-12">
       <div className="mb-12 text-center">
