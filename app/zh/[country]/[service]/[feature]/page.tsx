@@ -16,7 +16,6 @@ import {
   generateDynamicIntro,
   generateDynamicParagraph,
 } from "@/lib/content-engine";
-import { generateServiceMetadata } from "@/lib/utils/metadata";
 import ProgrammaticPage from "@/components/ProgrammaticPage";
 import {
   PaymentStatusDashboard,
@@ -156,21 +155,33 @@ export async function generateMetadata({
         : []),
     ];
 
-    // 生成 slug（用于 canonical URL）
-    const slug = `${country}-${service}-${feature}`;
+    // 生成正确的 canonical URL 路径（与 trailingSlash: true 保持一致）
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.br21.com";
+    const canonicalPath = `/zh/${country}/${service}/${feature}/`;
+    const canonical = `${baseUrl}${canonicalPath}`;
 
-    // 使用 generateServiceMetadata 生成完整的 metadata（包含 canonical）
-    return generateServiceMetadata(
-      {
+    // 生成完整的 metadata（包含正确的 canonical URL）
+    return {
+      title,
+      description,
+      keywords: keywords.join(", "),
+      alternates: {
+        canonical,
+      },
+      openGraph: {
         title,
         description,
-        keywords,
-        country: market.name,
-        countrySlug: country,
-        serviceType: serviceData.nameZh,
+        type: "article",
+        locale: "zh_CN",
+        url: canonical,
+        siteName: "BR21",
       },
-      slug
-    );
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+      },
+    };
   } catch (error: any) {
     console.error("[generateMetadata] CRITICAL ERROR:", {
       error: error.message,
