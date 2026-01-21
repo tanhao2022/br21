@@ -12,9 +12,10 @@ export function generateServiceMetadata(
   frontMatter: MDXFrontMatter,
   slug: string
 ): Metadata {
+  // 安全处理 keywords（支持 string 或 string[]）
   const keywords = Array.isArray(frontMatter.keywords)
     ? frontMatter.keywords.join(", ")
-    : frontMatter.keywords;
+    : frontMatter.keywords || "";
 
   // 确保 canonical URL 以尾斜杠结尾（处理重复斜杠）
   let canonicalPath = `/zh/${slug}`.replace(/\/+/g, "/"); // 去除重复斜杠
