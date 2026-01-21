@@ -52,12 +52,21 @@ export default function ZhLayout({
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 © 2024 BR21. All rights reserved.
               </p>
-              <Link
-                href="/zh/sitemap/"
-                className="text-xs text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-300"
-              >
-                全站索引
-              </Link>
+              <div className="flex items-center gap-4">
+                <Link
+                  href="/zh/solutions"
+                  className="text-xs text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-300"
+                >
+                  市场解决方案
+                </Link>
+                <span className="text-xs text-gray-400">|</span>
+                <Link
+                  href="/zh/sitemap/"
+                  className="text-xs text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-300"
+                >
+                  全站索引
+                </Link>
+              </div>
             </div>
           </div>
         </div>
