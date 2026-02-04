@@ -54,7 +54,7 @@ export default function ZhLayout({
               </p>
               <div className="flex items-center gap-4">
                 <Link
-                  href="/zh/solutions"
+                  href="/zh/solutions/"
                   className="text-xs text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-300"
                 >
                   市场解决方案

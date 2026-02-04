@@ -13,25 +13,25 @@ const hotMarkets = [
     name: "印度",
     flag: "🇮🇳",
     description: "印度 Rummy & Teen Patti 投放专家",
-    href: "/zh/india-rummy-uac",
+    href: "/zh/india/rummy/agency/",
   },
   {
     name: "印尼",
     flag: "🇮🇩",
     description: "印尼 Slot Gacor 霸屏推广",
-    href: "/zh/indonesia-slot-gacor",
+    href: "/zh/indonesia/slot/agency/",
   },
   {
     name: "菲律宾",
     flag: "🇵🇭",
     description: "菲律宾 JILI/FC 电子代投",
-    href: "/zh/philippines-jili-gcash",
+    href: "/zh/philippines/slot/agency/",
   },
   {
     name: "越南",
     flag: "🇻🇳",
     description: "越南 Tài Xỉu & Nổ Hũ 代投",
-    href: "/zh/vietnam-tai-xiu-ads",
+    href: "/zh/vietnam/slot/agency/",
   },
 ];
 
@@ -89,7 +89,7 @@ export default function ZhHome() {
         {/* Hero Cards - 确保与下方4个卡片总宽度对齐 */}
         <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2">
           <Link
-            href="/zh/brazil-slot-ditou"
+            href="/zh/brazil/slot/agency/"
             className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md dark:border-gray-700 dark:bg-gray-800"
           >
             <h2 className="mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">
@@ -101,7 +101,7 @@ export default function ZhHome() {
           </Link>
 
           <Link
-            href="/zh/slot-ditou"
+            href="/zh/solutions/"
             className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md dark:border-gray-700 dark:bg-gray-800"
           >
             <h2 className="mb-2 text-xl font-semibold text-gray-900 dark:text-gray-100">

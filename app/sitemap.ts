@@ -88,13 +88,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  // 5. 添加其他静态页面
-  // 例如：关于页面、HTML sitemap 等
+  // 5. 添加其他静态页面（全部使用尾斜杠，避免 GSC 重定向错误）
+  sitemapEntries.push({
+    url: `${baseUrl}/zh/solutions/`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  });
   sitemapEntries.push({
     url: `${baseUrl}/zh/sitemap/`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.5,
+  });
+  sitemapEntries.push({
+    url: `${baseUrl}/zh/blog/`,
+    lastModified: new Date(),
+    changeFrequency: "daily" as const,
+    priority: 0.8,
+  });
+  sitemapEntries.push({
+    url: `${baseUrl}/zh/markets/`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.6,
   });
 
   // 构建时输出统计信息

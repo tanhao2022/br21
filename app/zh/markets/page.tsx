@@ -8,17 +8,17 @@ export const metadata: Metadata = {
 
 const marketSolutions = {
   "拉美市场": [
-    { name: "巴西", href: "/zh/brazil-slot-ditou", flag: "🇧🇷", hot: true },
-    { name: "墨西哥", href: "/zh/mexico-slot-ads", flag: "🇲🇽", hot: false },
+    { name: "巴西", href: "/zh/brazil/slot/agency/", flag: "🇧🇷", hot: true },
+    { name: "墨西哥", href: "/zh/solutions/", flag: "🇲🇽", hot: false },
   ],
   "亚洲市场": [
-    { name: "印度", href: "/zh/india-rummy-uac", flag: "🇮🇳", hot: true },
-    { name: "印尼", href: "/zh/indonesia-slot-gacor", flag: "🇮🇩", hot: true },
-    { name: "菲律宾", href: "/zh/philippines-jili-gcash", flag: "🇵🇭", hot: true },
-    { name: "越南", href: "/zh/vietnam-tai-xiu-ads", flag: "🇻🇳", hot: true },
+    { name: "印度", href: "/zh/india/rummy/agency/", flag: "🇮🇳", hot: true },
+    { name: "印尼", href: "/zh/indonesia/slot/agency/", flag: "🇮🇩", hot: true },
+    { name: "菲律宾", href: "/zh/philippines/slot/agency/", flag: "🇵🇭", hot: true },
+    { name: "越南", href: "/zh/vietnam/slot/agency/", flag: "🇻🇳", hot: true },
   ],
   "非洲市场": [
-    { name: "尼日利亚", href: "/zh/nigeria-slot-ads", flag: "🇳🇬", hot: false },
+    { name: "尼日利亚", href: "/zh/solutions/", flag: "🇳🇬", hot: false },
   ],
 };
 

@@ -83,21 +83,21 @@ export default function ServicePage({
   if (showInternalLinks) {
     // 通用 Slot 代投页面
     internalLinks.push({
-      href: "/zh/slot-ditou",
+      href: "/zh/brazil/slot/agency/",
       label: "Slot 代投服务",
     });
 
     // 国家主页面（如果提供了 countrySlug）
     if (frontMatter.countrySlug) {
       internalLinks.push({
-        href: `/zh/${frontMatter.countrySlug}`,
+        href: `/zh/${frontMatter.countrySlug}/`,
         label: `${frontMatter.country || ""} 市场详情`,
       });
     }
 
     // 市场总览页面
     internalLinks.push({
-      href: "/zh/markets",
+      href: "/zh/markets/",
       label: "所有市场",
     });
   }

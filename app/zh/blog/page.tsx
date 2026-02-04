@@ -63,7 +63,7 @@ export default function BlogPage() {
         {blogPosts.map((post) => (
           <Link
             key={post.slug}
-            href={`/zh/blog/${post.slug}`}
+            href={`/zh/blog/${post.slug}/`}
             className="group flex flex-col rounded-lg border border-gray-200 bg-white shadow-sm transition-all hover:border-blue-300 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
           >
             <div className="flex-1 p-6">

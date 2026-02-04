@@ -306,7 +306,7 @@ export default async function BlogPostPage({
     return (
       <div className="mx-auto max-w-4xl px-4 py-12">
         <p>文章未找到</p>
-        <Link href="/zh/blog" className="text-blue-600 hover:underline">
+        <Link href="/zh/blog/" className="text-blue-600 hover:underline">
           返回博客列表
         </Link>
       </div>
@@ -325,7 +325,7 @@ export default async function BlogPostPage({
       )}
         <div className="mb-8">
           <Link
-            href="/zh/blog"
+            href="/zh/blog/"
             className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
           >
             <ArrowLeft className="h-4 w-4" />
@@ -390,7 +390,7 @@ export default async function BlogPostPage({
             </p>
             <div className="grid gap-4 md:grid-cols-2">
               <Link
-                href="/zh/brazil-slot-ditou"
+                href="/zh/brazil/slot/agency/"
                 className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 transition-all hover:border-blue-300 hover:shadow-md dark:border-gray-700 dark:bg-gray-900"
               >
                 <span className="font-medium text-gray-900 dark:text-gray-100">
@@ -399,7 +399,7 @@ export default async function BlogPostPage({
                 <ExternalLink className="h-4 w-4 text-gray-400" />
               </Link>
               <Link
-                href="/zh/india-rummy-uac"
+                href="/zh/india/rummy/agency/"
                 className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 transition-all hover:border-blue-300 hover:shadow-md dark:border-gray-700 dark:bg-gray-900"
               >
                 <span className="font-medium text-gray-900 dark:text-gray-100">
@@ -408,7 +408,7 @@ export default async function BlogPostPage({
                 <ExternalLink className="h-4 w-4 text-gray-400" />
               </Link>
               <Link
-                href="/zh/markets"
+                href="/zh/markets/"
                 className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 transition-all hover:border-blue-300 hover:shadow-md dark:border-gray-700 dark:bg-gray-900"
               >
                 <span className="font-medium text-gray-900 dark:text-gray-100">

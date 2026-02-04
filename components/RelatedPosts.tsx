@@ -19,7 +19,7 @@ export default function RelatedPosts({ posts }: RelatedPostsProps) {
         {posts.map((post) => (
           <Link
             key={post.slug}
-            href={`/zh/blog/${post.slug}`}
+            href={`/zh/blog/${post.slug}/`}
             className="group rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-all hover:border-blue-300 hover:shadow-md dark:border-gray-700 dark:bg-gray-900"
           >
             <div className="mb-3 flex items-center gap-2">

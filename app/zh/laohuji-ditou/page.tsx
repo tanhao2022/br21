@@ -29,7 +29,7 @@ export default function LaohujiDitouPage() {
         如果您想了解详细的代投服务信息，请访问：
       </p>
       <Link
-        href="/zh/slot-ditou"
+        href="/zh/brazil/slot/agency/"
         className="inline-block rounded-lg bg-blue-600 px-6 py-3 text-white transition-colors hover:bg-blue-700"
       >
         查看 Slot 代投服务详情
