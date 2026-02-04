@@ -2,12 +2,17 @@ import { Metadata } from "next";
 import { marketServiceMatrix } from "@/lib/seo-matrix";
 import Link from "next/link";
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.br21.com";
+
 export const metadata: Metadata = {
   title: "网站地图 | BR21",
   description: "BR21 全站页面索引，按国家分类浏览所有服务页面",
   robots: {
     index: true,
     follow: true,
+  },
+  alternates: {
+    canonical: `${baseUrl}/zh/sitemap/`,
   },
 };
 

@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.br21.com";
+
 export const metadata: Metadata = {
   title: "市场解决方案 | BR21",
   description: "BR21 全球老虎机代投服务 - 覆盖拉美、亚洲、非洲等主要市场",
+  alternates: {
+    canonical: `${baseUrl}/zh/markets/`,
+  },
 };
 
 const marketSolutions = {

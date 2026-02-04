@@ -2,9 +2,14 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getAllMDXContent } from "@/lib/utils/mdx";
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.br21.com";
+
 export const metadata: Metadata = {
   title: "行业洞察",
   description: "BR21 专业团队分享 iGaming 市场趋势、技术解决方案和成功案例",
+  alternates: {
+    canonical: `${baseUrl}/zh/blog/`,
+  },
 };
 
 // 分类标签映射

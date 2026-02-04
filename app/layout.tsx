@@ -24,9 +24,7 @@ export const metadata: Metadata = {
     locale: "zh_CN",
     siteName: "BR21",
   },
-  alternates: {
-    canonical: process.env.NEXT_PUBLIC_SITE_URL || "https://www.br21.com",
-  },
+  // 不在此设置 canonical，由各页面自行输出，避免子路由错误继承首页 canonical
 };
 
 export default function RootLayout({

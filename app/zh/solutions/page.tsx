@@ -2,10 +2,15 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { marketServiceMatrix } from "@/lib/seo-matrix";
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.br21.com";
+
 export const metadata: Metadata = {
   title: "全球 iGaming 市场解决方案 | BR21",
   description: "BR21 提供全球 iGaming 市场解决方案，覆盖巴西、菲律宾、印度、印尼、越南等核心市场，以及全球通用服务。按国家分类浏览所有服务页面。",
   keywords: "iGaming 解决方案, Slot 代投, 全球市场, 巴西, 菲律宾, 印度, 印尼, 越南",
+  alternates: {
+    canonical: `${baseUrl}/zh/solutions/`,
+  },
 };
 
 // 市场旗帜映射

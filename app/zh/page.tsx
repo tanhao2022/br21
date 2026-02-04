@@ -3,9 +3,14 @@ import type { Metadata } from "next";
 import { Send } from "lucide-react";
 import HeroCTA from "./HeroCTA";
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.br21.com";
+
 export const metadata: Metadata = {
   title: "首页",
   description: "BR21 - 全球 iGaming 流量增长引擎。深耕东南亚、印度、拉美核心市场，提供 Facebook、Google、TikTok 一站式广告投放与风控解决方案",
+  alternates: {
+    canonical: `${baseUrl}/zh/`,
+  },
 };
 
 const hotMarkets = [
