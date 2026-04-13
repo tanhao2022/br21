@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.br21.com";
+
 export const metadata: Metadata = {
   title: "关于我们",
   description: "BR21 - 全球老虎机代投服务专业团队，覆盖拉美、亚洲、非洲等主要市场",
+  alternates: {
+    canonical: `${baseUrl}/zh/about/`,
+  },
 };
 
 export default function AboutPage() {

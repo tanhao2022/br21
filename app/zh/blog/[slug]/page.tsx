@@ -247,18 +247,31 @@ function generateTOC(content: string): Array<{ id: string; text: string; level: 
   return toc;
 }
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.br21.com";
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
+  const canonical = `${baseUrl}/zh/blog/${slug}/`;
+
   // 优先从 MDX 读取
   const mdxData = getMDXContent("blog", slug);
   if (mdxData) {
     return {
       title: mdxData.frontMatter.title,
-      description: `${mdxData.frontMatter.title} - BR21 行业洞察`,
+      description: mdxData.frontMatter.description || `${mdxData.frontMatter.title} - BR21 行业洞察`,
+      alternates: { canonical },
+      openGraph: {
+        title: mdxData.frontMatter.title,
+        description: mdxData.frontMatter.description || `${mdxData.frontMatter.title} - BR21 行业洞察`,
+        type: "article",
+        locale: "zh_CN",
+        url: canonical,
+        siteName: "BR21",
+      },
     };
   }
   // 后备：使用硬编码数据
@@ -271,6 +284,15 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: `${post.title} - BR21 行业洞察`,
+    alternates: { canonical },
+    openGraph: {
+      title: post.title,
+      description: `${post.title} - BR21 行业洞察`,
+      type: "article",
+      locale: "zh_CN",
+      url: canonical,
+      siteName: "BR21",
+    },
   };
 }
 

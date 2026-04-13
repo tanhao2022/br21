@@ -25,6 +25,13 @@ export const metadata: Metadata = {
     siteName: "BR21",
   },
   // 不在此设置 canonical，由各页面自行输出，避免子路由错误继承首页 canonical
+  // hreflang: 标记当前站点语言为中文，x-default 指向当前站点（未来添加多语言时扩展）
+  alternates: {
+    languages: {
+      "zh-CN": "https://www.br21.com/zh/",
+      "x-default": "https://www.br21.com/zh/",
+    },
+  },
 };
 
 export default function RootLayout({
@@ -41,7 +48,7 @@ export default function RootLayout({
     "@type": "Organization",
     name: "BR21",
     url: baseUrl,
-    logo: `${baseUrl}/favicon.ico`, // 使用 favicon 作为占位符，待后续添加实际 logo
+    logo: `${baseUrl}/favicon.ico`,
     description:
       "全球 iGaming 流量增长引擎，提供 Facebook、Google 广告投放与风控解决方案。",
     contactPoint: {
@@ -53,6 +60,63 @@ export default function RootLayout({
     sameAs: ["https://t.me/youfa8577"],
   };
 
+  // Service Schema - 核心业务服务
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "iGaming 广告投放服务",
+    provider: {
+      "@type": "Organization",
+      name: "BR21",
+      url: baseUrl,
+    },
+    areaServed: [
+      { "@type": "Country", name: "Brazil" },
+      { "@type": "Country", name: "Philippines" },
+      { "@type": "Country", name: "India" },
+      { "@type": "Country", name: "Indonesia" },
+      { "@type": "Country", name: "Vietnam" },
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "iGaming 广告服务",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Slot 广告代投",
+            description: "老虎机类游戏 Facebook、Google 广告投放服务",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Rummy 广告代投",
+            description: "真金棋牌游戏 Google UAC 广告投放服务",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "支付优化",
+            description: "PIX、GCash、UPI 等本地支付成功率优化",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "CAPI 回传优化",
+            description: "Conversions API 数据回传与归因优化",
+          },
+        },
+      ],
+    },
+  };
+
   return (
     <html lang="zh-CN">
       <body className={`${inter.variable} font-sans antialiased`}>
@@ -61,6 +125,13 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(organizationSchema),
+          }}
+        />
+        {/* Service Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(serviceSchema),
           }}
         />
         {/* Google tag (gtag.js) */}

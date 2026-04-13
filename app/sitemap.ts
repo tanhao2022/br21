@@ -1,40 +1,67 @@
 import { MetadataRoute } from "next";
 import { marketServiceMatrix } from "@/lib/seo-matrix";
 import { getMDXFiles } from "@/lib/utils/mdx";
+import fs from "fs";
+import path from "path";
 
 export const dynamic = "force-static";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.br21.com";
 
 /**
+ * 获取 /zh 下所有静态页面路由（排除动态路由和特殊页面）
+ */
+function getStaticPageSlugs(): string[] {
+  const zhDir = path.join(process.cwd(), "app", "zh");
+  const slugs: string[] = [];
+
+  try {
+    const entries = fs.readdirSync(zhDir, { withFileTypes: true });
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue;
+      // 跳过动态路由目录
+      if (entry.name.startsWith("[")) continue;
+      // 跳过博客（单独处理）
+      if (entry.name === "blog") continue;
+      // 跳过已在 sitemap 中单独添加的页面
+      if (["solutions", "sitemap", "markets"].includes(entry.name)) continue;
+      // 跳过市场着陆页（单独添加）
+      const marketSlugs = marketServiceMatrix.markets.map((m) => m.slug);
+      if (marketSlugs.includes(entry.name)) continue;
+
+      // 检查是否有 page.tsx
+      const pagePath = path.join(zhDir, entry.name, "page.tsx");
+      if (fs.existsSync(pagePath)) {
+        slugs.push(entry.name);
+      }
+    }
+  } catch (error) {
+    console.warn(`[sitemap] Failed to scan static pages: ${error}`);
+  }
+
+  return slugs;
+}
+
+/**
  * 生成单个统一的 Sitemap
- * 
- * 由于静态导出（output: "export"）不支持动态 sitemap 路由，
- * 我们生成一个包含所有 URL 的单一 sitemap 文件。
- * 
- * 注意：Google 建议每个 sitemap 最多包含 50,000 个 URL。
- * 如果超过此限制，需要拆分为多个 sitemap 并创建 sitemap index。
+ *
+ * 包含：首页、市场着陆页、动态服务页、博客、静态页面
+ * 不包含：会重定向的 URL（如 /）、不存在的页面
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sitemapEntries: MetadataRoute.Sitemap = [];
 
-  // 构建时验证
-  if (
-    process.env.NODE_ENV === "production" ||
-    process.env.NEXT_PHASE === "phase-production-build"
-  ) {
-    console.log(`[sitemap] Generating unified sitemap for all markets...`);
+  // 需要排除的市场（没有着陆页的市场）
+  const marketsWithLandingPage = new Set<string>();
+  const zhDir = path.join(process.cwd(), "app", "zh");
+  for (const market of marketServiceMatrix.markets) {
+    const landingPage = path.join(zhDir, market.slug, "page.tsx");
+    if (fs.existsSync(landingPage)) {
+      marketsWithLandingPage.add(market.slug);
+    }
   }
 
-  // 1. 添加首页
-  sitemapEntries.push({
-    url: `${baseUrl}/`,
-    lastModified: new Date(),
-    changeFrequency: "daily" as const,
-    priority: 1.0,
-  });
-
-  // 2. 添加中文首页
+  // 1. 中文首页（不添加 /，因为它会 redirect 到 /zh/，会导致 GSC "网页会自动重定向"）
   sitemapEntries.push({
     url: `${baseUrl}/zh/`,
     lastModified: new Date(),
@@ -42,31 +69,33 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 1.0,
   });
 
-  // 3. 为每个市场生成 URL
+  // 2. 市场着陆页（仅添加实际存在的页面）
   for (const market of marketServiceMatrix.markets) {
-    // 3.1 添加市场主页面（优先级 1.0）
-    sitemapEntries.push({
-      url: `${baseUrl}/zh/${market.slug}/`,
-      lastModified: new Date(),
-      changeFrequency: "daily" as const,
-      priority: 1.0,
-    });
+    if (marketsWithLandingPage.has(market.slug)) {
+      sitemapEntries.push({
+        url: `${baseUrl}/zh/${market.slug}/`,
+        lastModified: new Date(),
+        changeFrequency: "daily" as const,
+        priority: 1.0,
+      });
+    }
+  }
 
-    // 3.2 生成所有 Market * Service * Feature 组合的 URL
-    // URL 结构: /zh/{marketSlug}/{serviceSlug}/{featureSlug}
+  // 3. 动态服务页面（所有 Market * Service * Feature 组合）
+  for (const market of marketServiceMatrix.markets) {
     for (const service of marketServiceMatrix.services) {
       for (const feature of marketServiceMatrix.features) {
         sitemapEntries.push({
           url: `${baseUrl}/zh/${market.slug}/${service.slug}/${feature.slug}/`,
           lastModified: new Date(),
           changeFrequency: "daily" as const,
-          priority: 0.9, // 高价值服务/功能页面
+          priority: 0.9,
         });
       }
     }
   }
 
-  // 4. 添加博客文章
+  // 4. 博客文章
   try {
     const blogFiles = getMDXFiles("blog");
     for (const file of blogFiles) {
@@ -79,7 +108,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       });
     }
   } catch (error) {
-    // 如果读取失败，继续执行（不影响主要 sitemap 生成）
     if (
       process.env.NODE_ENV === "production" ||
       process.env.NEXT_PHASE === "phase-production-build"
@@ -88,55 +116,53 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  // 5. 添加其他静态页面（全部使用尾斜杠，避免 GSC 重定向错误）
-  sitemapEntries.push({
-    url: `${baseUrl}/zh/solutions/`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.8,
-  });
-  sitemapEntries.push({
-    url: `${baseUrl}/zh/sitemap/`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.5,
-  });
-  sitemapEntries.push({
-    url: `${baseUrl}/zh/blog/`,
-    lastModified: new Date(),
-    changeFrequency: "daily" as const,
-    priority: 0.8,
-  });
-  sitemapEntries.push({
-    url: `${baseUrl}/zh/markets/`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: 0.6,
-  });
+  // 5. 静态页面（solutions, blog listing, sitemap, markets, about）
+  const staticPages = [
+    { path: "solutions", priority: 0.8, changeFrequency: "weekly" as const },
+    { path: "blog", priority: 0.8, changeFrequency: "daily" as const },
+    { path: "markets", priority: 0.6, changeFrequency: "weekly" as const },
+    { path: "sitemap", priority: 0.5, changeFrequency: "weekly" as const },
+  ];
+
+  for (const page of staticPages) {
+    sitemapEntries.push({
+      url: `${baseUrl}/zh/${page.path}/`,
+      lastModified: new Date(),
+      changeFrequency: page.changeFrequency,
+      priority: page.priority,
+    });
+  }
+
+  // 6. 长尾静态页面（SEO 关键词页面，如 brazil-pix-slot、slot-ditou 等）
+  const staticPageSlugs = getStaticPageSlugs();
+  for (const slug of staticPageSlugs) {
+    sitemapEntries.push({
+      url: `${baseUrl}/zh/${slug}/`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    });
+  }
 
   // 构建时输出统计信息
   if (
     process.env.NODE_ENV === "production" ||
     process.env.NEXT_PHASE === "phase-production-build"
   ) {
-    const serviceFeatureCount =
-      marketServiceMatrix.services.length *
-      marketServiceMatrix.features.length;
-    const marketCount = marketServiceMatrix.markets.length;
-    const totalServiceFeaturePages = marketCount * serviceFeatureCount;
-    
-    console.log(`[sitemap] Generated unified sitemap with ${sitemapEntries.length} URLs:`);
-    console.log(`[sitemap]   - 2 homepage URLs (priority 1.0)`);
-    console.log(`[sitemap]   - ${marketCount} market landing pages (priority 1.0)`);
-    console.log(`[sitemap]   - ${totalServiceFeaturePages} service/feature pages (priority 0.9)`);
-    console.log(`[sitemap]   - ${sitemapEntries.length - totalServiceFeaturePages - marketCount - 2} other pages`);
-    
-    // 检查是否超过 Google 建议的限制
-    if (sitemapEntries.length > 50000) {
-      console.warn(
-        `[sitemap] WARNING: Sitemap contains ${sitemapEntries.length} URLs, which exceeds Google's recommended limit of 50,000. Consider splitting into multiple sitemaps.`
-      );
-    }
+    console.log(
+      `[sitemap] Generated unified sitemap with ${sitemapEntries.length} URLs:`
+    );
+    console.log(`[sitemap]   - 1 homepage`);
+    console.log(
+      `[sitemap]   - ${marketsWithLandingPage.size} market landing pages`
+    );
+    console.log(
+      `[sitemap]   - ${marketServiceMatrix.markets.length * marketServiceMatrix.services.length * marketServiceMatrix.features.length} service/feature pages`
+    );
+    console.log(`[sitemap]   - ${staticPageSlugs.length} long-tail static pages`);
+    console.log(
+      `[sitemap]   - ${sitemapEntries.length - 1 - marketsWithLandingPage.size - marketServiceMatrix.markets.length * marketServiceMatrix.services.length * marketServiceMatrix.features.length - staticPageSlugs.length} other pages`
+    );
   }
 
   return sitemapEntries;

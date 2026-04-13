@@ -1,4 +1,3 @@
 # 将 /index.html 重定向到规范首页，避免 GSC 报 404
-# 部署到 Netlify 时，此文件需复制到发布根目录（或根目录建 _redirects）
-/index.html    /    301
+/index.html    /zh/    301
 /zh/index.html    /zh/    301

@@ -50,7 +50,7 @@ export default function ZhLayout({
           <div className="mt-8 border-t border-gray-200 pt-8 dark:border-gray-700">
             <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                © 2024 BR21. All rights reserved.
+                © 2025 BR21. All rights reserved.
               </p>
               <div className="flex items-center gap-4">
                 <Link

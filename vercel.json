@@ -2,13 +2,24 @@
   "redirects": [
     {
       "source": "/index.html",
-      "destination": "/",
+      "destination": "/zh/",
       "permanent": true
     },
     {
       "source": "/zh/index.html",
       "destination": "/zh/",
       "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
+        }
+      ]
     }
   ]
 }
