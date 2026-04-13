@@ -113,15 +113,19 @@ export async function generateMetadata({
     // 生成差异化的 Title（必须包含本地支付方式）
     // 格式：{国家} {服务} {功能} | 解决 {支付方式} {核心痛点} | BR21
     // 限制长度在 60 字符以内（Google 推荐）
-    const painPoint = getMainPainPoint(market, serviceData);
-    let title = `${market.nameZh}${serviceData.nameZh}${featureData.nameZh} | 解决${primaryPaymentMethod}${painPoint} | BR21`;
+    const rawPainPointTitle = getMainPainPoint(market, serviceData);
+    // 避免支付方式名称重复（如 painPoint 已包含 "PIX" 则不再前缀 "PIX"）
+    const titlePainPoint = rawPainPointTitle.startsWith(primaryPaymentMethod)
+      ? rawPainPointTitle
+      : `${primaryPaymentMethod}${rawPainPointTitle}`;
+    let title = `${market.nameZh}${serviceData.nameZh}${featureData.nameZh} | 解决${titlePainPoint} | BR21`;
     if (title.length > 60) {
       // 如果过长，截断痛点部分
-      const maxPainPointLength = 60 - (title.length - painPoint.length);
-      const truncatedPainPoint = maxPainPointLength > 0 
-        ? painPoint.substring(0, maxPainPointLength - 3) + "..."
+      const maxPainPointLength = 60 - (title.length - titlePainPoint.length);
+      const truncatedPainPoint = maxPainPointLength > 0
+        ? titlePainPoint.substring(0, maxPainPointLength - 3) + "..."
         : "";
-      title = `${market.nameZh}${serviceData.nameZh}${featureData.nameZh} | 解决${primaryPaymentMethod}${truncatedPainPoint} | BR21`;
+      title = `${market.nameZh}${serviceData.nameZh}${featureData.nameZh} | 解决${truncatedPainPoint} | BR21`;
       // 如果还是过长，进一步截断
       if (title.length > 60) {
         title = title.substring(0, 57) + "...";
@@ -135,7 +139,12 @@ export async function generateMetadata({
     const painPoints = getTechnicalPainPoints(country, service);
     const hooks = getConversionHooks(country, service);
 
-    let description = `${market.nameZh}是${getMarketDescription(market)}。BR21专注${market.nameZh}${serviceData.nameZh}${featureData.nameZh}服务，解决${primaryPaymentMethod}${painPoints[0] || "核心痛点"}。提供${hooks[0] || "专业解决方案"}，${getROIRange(market)}。`;
+    // 避免支付方式名称重复（如 painPoints[0] 已包含 "PIX" 则不再前缀 "PIX"）
+    const rawPainPoint = painPoints[0] || "核心痛点";
+    const painPointText = rawPainPoint.startsWith(primaryPaymentMethod)
+      ? rawPainPoint
+      : `${primaryPaymentMethod}${rawPainPoint}`;
+    let description = `${market.nameZh}是${getMarketDescription(market)}。BR21专注${market.nameZh}${serviceData.nameZh}${featureData.nameZh}服务，解决${painPointText}。提供${hooks[0] || "专业解决方案"}，${getROIRange(market)}。`;
     if (description.length > 160) {
       // 截断到 160 字符，保留完整句子
       description = description.substring(0, 157) + "...";
@@ -175,6 +184,7 @@ export async function generateMetadata({
         locale: "zh_CN",
         url: canonical,
         siteName: "BR21",
+        images: [{ url: `${baseUrl}/og-image.svg`, width: 1200, height: 630, alt: title }],
       },
       twitter: {
         card: "summary_large_image",
@@ -355,10 +365,16 @@ export default async function DynamicServicePage({ params }: PageProps) {
     const hooks = getConversionHooks(country, service);
     const keywords = getLocalizedKeywords(country, service, feature);
 
+    // 避免支付方式名称重复（如 "PIX" + "PIX支付掉单率高" → "PIXPIX..."）
+    const bodyPainPoint = getMainPainPoint(market, serviceData);
+    const bodyPainPointFull = bodyPainPoint.startsWith(primaryPayment) ? bodyPainPoint : `${primaryPayment}${bodyPainPoint}`;
+    const bodyRawPainPoint = painPoints[0] || "核心痛点";
+    const bodyPainPointDesc = bodyRawPainPoint.startsWith(primaryPayment) ? bodyRawPainPoint : `${primaryPayment}${bodyRawPainPoint}`;
+
     const mdxData = {
       frontMatter: {
-        title: `${market.nameZh}${serviceData.nameZh}${featureData.nameZh} | 解决${primaryPayment}${getMainPainPoint(market, serviceData)} | BR21`,
-        description: `${market.nameZh}是${getMarketDescription(market)}。BR21专注${market.nameZh}${serviceData.nameZh}${featureData.nameZh}服务，解决${primaryPayment}${painPoints[0] || "核心痛点"}。提供${hooks[0] || "专业解决方案"}，${getROIRange(market)}。`,
+        title: `${market.nameZh}${serviceData.nameZh}${featureData.nameZh} | 解决${bodyPainPointFull} | BR21`,
+        description: `${market.nameZh}是${getMarketDescription(market)}。BR21专注${market.nameZh}${serviceData.nameZh}${featureData.nameZh}服务，解决${bodyPainPointDesc}。提供${hooks[0] || "专业解决方案"}，${getROIRange(market)}。`,
         keywords: Array.isArray(keywords) ? keywords : [],
         country: market.name,
         countrySlug: country,
@@ -720,17 +736,22 @@ function generateFAQ(
   const hooks = getConversionHooks(market.slug, service.slug);
   const hookText = Array.isArray(hooks) && hooks.length > 0 ? hooks[0] : "专业解决方案";
 
+  // 避免支付方式名称重复
+  const faqPainPointFull = painPoint.startsWith(primaryPayment) ? painPoint : `${primaryPayment}${painPoint}`;
+  const faqPainPointClean = painPoint.replace(/（[^）]+）/g, "").replace(/\([^)]+\)/g, "");
+  const faqPainPointQuestion = faqPainPointClean.startsWith(primaryPayment) ? faqPainPointClean : `${primaryPayment}${faqPainPointClean}`;
+
   return [
     {
       question: `为什么选择${market.nameZh}${service.nameZh}${feature.nameZh}？`,
-      answer: `${market.nameZh}是${getMarketDescription(market)}。BR21专注${market.nameZh}${service.nameZh}${feature.nameZh}服务，解决${primaryPayment}${painPoint}。提供${hookText}，${getROIRange(market)}。`,
+      answer: `${market.nameZh}是${getMarketDescription(market)}。BR21专注${market.nameZh}${service.nameZh}${feature.nameZh}服务，解决${faqPainPointFull}。提供${hookText}，${getROIRange(market)}。`,
     },
     {
       question: `${market.nameZh}${service.nameZh}${feature.nameZh}的核心挑战是什么？`,
       answer: `${market.nameZh}市场主要挑战：${marketPainPoints.slice(0, 3).join("；")}。BR21通过${technicalTerms[0] || "专业技术"}、${technicalTerms[1] || "优化方案"}，解决这些痛点。`,
     },
     {
-      question: `如何解决${primaryPayment}${painPoint.replace(/（[^）]+）/g, "").replace(/\([^)]+\)/g, "")}？`,
+      question: `如何解决${faqPainPointQuestion}？`,
       answer: `BR21通过${technicalTerms[0] || "专业技术"}，集成多家${market.nameZh}本地支付商，系统实时监控成功率，智能切换高成功率通道。实测${primaryPayment}成功率可稳定在85%以上，每提升1%成功率，ROI直接提升5%-8%。`,
     },
   ];

@@ -191,10 +191,16 @@ export function generateDynamicDescription(
   const hash = simpleHash(seed);
   const primaryPayment = market.paymentMethods[0];
 
+  // 避免支付方式名称与痛点描述重复（如 "PIX" + "PIX支付掉单率高" → "PIXPIX..."）
+  const rawPainPoint = market.marketPainPoints[0] || "核心痛点";
+  const painPointWithPayment = rawPainPoint.startsWith(primaryPayment)
+    ? rawPainPoint
+    : `${primaryPayment}${rawPainPoint}`;
+
   const descVariations = [
-    `${market.nameZh}是${getMarketDescriptionShort(market)}。BR21专注${market.nameZh}${service.nameZh}${feature}服务，解决${primaryPayment}${market.marketPainPoints[0] || "核心痛点"}。提供${service.conversionHooks[0] || "专业解决方案"}，ROI稳定在行业领先水平。`,
-    `BR21为${market.nameZh}市场的iGaming运营商提供${service.nameZh}${feature}服务。通过${primaryPayment}支付优化和${service.technicalPainPoints[0] || "专业技术"}，有效解决${market.marketPainPoints[0] || "核心痛点"}，帮助客户实现快速起量和稳定增长。`,
-    `在${market.nameZh}市场，${market.marketPainPoints[0] || "核心痛点"}是iGaming运营商面临的主要挑战。BR21通过${service.nameZh}${feature}服务，提供${primaryPayment}支付优化和${service.technicalPainPoints[0] || "专业技术"}，已帮助50+家运营商实现ROI提升。`,
+    `${market.nameZh}是${getMarketDescriptionShort(market)}。BR21专注${market.nameZh}${service.nameZh}${feature}服务，解决${painPointWithPayment}。提供${service.conversionHooks[0] || "专业解决方案"}，ROI稳定在行业领先水平。`,
+    `BR21为${market.nameZh}市场的iGaming运营商提供${service.nameZh}${feature}服务。通过${primaryPayment}支付优化和${service.technicalPainPoints[0] || "专业技术"}，有效解决${rawPainPoint}，帮助客户实现快速起量和稳定增长。`,
+    `在${market.nameZh}市场，${rawPainPoint}是iGaming运营商面临的主要挑战。BR21通过${service.nameZh}${feature}服务，提供${primaryPayment}支付优化和${service.technicalPainPoints[0] || "专业技术"}，已帮助50+家运营商实现ROI提升。`,
   ];
 
   return descVariations[hash % descVariations.length];

@@ -7,6 +7,39 @@ import { ArrowLeft, ExternalLink } from "lucide-react";
 import { getMDXContent, getMDXFiles } from "@/lib/utils/mdx";
 import { generateFAQSchema } from "@/components/SEO";
 
+// 生成 Article Schema（BlogPosting）
+function generateArticleSchema(post: { title: string; date: string; description?: string }, slug: string) {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.br21.com";
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description || `${post.title} - BR21 行业洞察`,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      "@type": "Organization",
+      name: "BR21",
+      url: baseUrl,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "BR21",
+      url: baseUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: `${baseUrl}/favicon.ico`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${baseUrl}/zh/blog/${slug}/`,
+    },
+    image: `${baseUrl}/og-image.svg`,
+    inLanguage: "zh-CN",
+  };
+}
+
 // 保留硬编码内容作为后备（如果 MDX 文件不存在）
 const blogContent: Record<string, { title: string; content: string; date: string; category: string }> = {
   "2026-brazil-igaming-payment-report": {
@@ -257,20 +290,30 @@ export async function generateMetadata({
   const { slug } = await params;
   const canonical = `${baseUrl}/zh/blog/${slug}/`;
 
+  const ogImageUrl = `${baseUrl}/og-image.svg`;
+
   // 优先从 MDX 读取
   const mdxData = getMDXContent("blog", slug);
   if (mdxData) {
+    const desc = mdxData.frontMatter.description || `${mdxData.frontMatter.title} - BR21 行业洞察`;
     return {
       title: mdxData.frontMatter.title,
-      description: mdxData.frontMatter.description || `${mdxData.frontMatter.title} - BR21 行业洞察`,
+      description: desc,
       alternates: { canonical },
       openGraph: {
         title: mdxData.frontMatter.title,
-        description: mdxData.frontMatter.description || `${mdxData.frontMatter.title} - BR21 行业洞察`,
+        description: desc,
         type: "article",
         locale: "zh_CN",
         url: canonical,
         siteName: "BR21",
+        images: [{ url: ogImageUrl, width: 1200, height: 630, alt: mdxData.frontMatter.title }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: mdxData.frontMatter.title,
+        description: desc,
+        images: [ogImageUrl],
       },
     };
   }
@@ -281,17 +324,25 @@ export async function generateMetadata({
       title: "文章未找到",
     };
   }
+  const fallbackDesc = `${post.title} - BR21 行业洞察`;
   return {
     title: post.title,
-    description: `${post.title} - BR21 行业洞察`,
+    description: fallbackDesc,
     alternates: { canonical },
     openGraph: {
       title: post.title,
-      description: `${post.title} - BR21 行业洞察`,
+      description: fallbackDesc,
       type: "article",
       locale: "zh_CN",
       url: canonical,
       siteName: "BR21",
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: fallbackDesc,
+      images: [ogImageUrl],
     },
   };
 }
@@ -324,6 +375,14 @@ export default async function BlogPostPage({
     post = blogContent[slug] || null;
   }
 
+  // 生成 Article Schema（BlogPosting）
+  const articleSchema = post
+    ? generateArticleSchema(
+        { title: post.title, date: post.date, description: mdxData?.frontMatter.description },
+        slug
+      )
+    : null;
+
   if (!post) {
     return (
       <div className="mx-auto max-w-4xl px-4 py-12">
@@ -339,6 +398,12 @@ export default async function BlogPostPage({
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12">
+      {articleSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        />
+      )}
       {faqSchema && (
         <script
           type="application/ld+json"

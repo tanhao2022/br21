@@ -23,6 +23,19 @@ export const metadata: Metadata = {
     type: "website",
     locale: "zh_CN",
     siteName: "BR21",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "BR21 - 全球 iGaming 流量增长引擎",
+        type: "image/svg+xml",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og-image.svg"],
   },
   // 不在此设置 canonical，由各页面自行输出，避免子路由错误继承首页 canonical
   // hreflang: 标记当前站点语言为中文，x-default 指向当前站点（未来添加多语言时扩展）
