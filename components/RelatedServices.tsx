@@ -37,12 +37,19 @@ export default function RelatedServices({
 
   // 1. Same Market, Different Services
   // 找到同市场但不同服务的页面（排除当前服务）
+  const features = marketServiceMatrix.features;
   const sameMarketDifferentServices = marketServiceMatrix.services
     .filter((service) => service.slug !== currentService)
     .slice(0, 4) // 限制4个
     .map((service) => {
-      // 选择第一个 feature 作为代表（或可以随机选择）
-      const feature = marketServiceMatrix.features[0];
+      // 基于市场+服务 slug 的确定性哈希选择 feature，避免锚文本同质化
+      // 同时排除 currentFeature，避免链回当前页
+      const candidates = currentFeature
+        ? features.filter((f) => f.slug !== currentFeature)
+        : features;
+      const pool = candidates.length > 0 ? candidates : features;
+      const idx = simpleHash(`${currentCountry}-${service.slug}-same-market`) % pool.length;
+      const feature = pool[idx];
       return {
         market: currentMarket,
         service,
@@ -68,8 +75,13 @@ export default function RelatedServices({
     })
     .slice(0, 4) // 限制4个
     .map((market) => {
-      // 选择第一个 feature 作为代表
-      const feature = marketServiceMatrix.features[0];
+      // 基于市场+服务 slug 的确定性哈希选择 feature，增加锚文本多样性
+      const candidates = currentFeature
+        ? features.filter((f) => f.slug !== currentFeature)
+        : features;
+      const pool = candidates.length > 0 ? candidates : features;
+      const idx = simpleHash(`${market.slug}-${currentService}-same-service`) % pool.length;
+      const feature = pool[idx];
       return {
         market,
         service: currentServiceData,
@@ -181,7 +193,7 @@ function RelatedServiceCard({
       ];
       
       // 使用确定性哈希选择变体（基于 market + service slug）
-      const hash = simpleHash(`${market.slug}-${service.slug}`);
+      const hash = simpleHash(`${market.slug}-${service.slug}-${feature.slug}`);
       return variations[hash % variations.length];
     } else {
       // 同服务不同市场：使用市场名称和痛点
@@ -192,7 +204,7 @@ function RelatedServiceCard({
         `探索${market.nameZh}市场的${service.nameZh}${feature.nameZh}优化`,
       ];
       
-      const hash = simpleHash(`${market.slug}-${service.slug}`);
+      const hash = simpleHash(`${market.slug}-${service.slug}-${feature.slug}`);
       return variations[hash % variations.length];
     }
   };
