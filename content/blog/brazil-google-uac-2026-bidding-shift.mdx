@@ -1,0 +1,88 @@
+---
+title: "2026 巴西 Google UAC 出价模型大调整：tROAS 取代 tCPA 成主流"
+description: "Google Ads 在巴西 iGaming 行业从 2026-04 起强推 tROAS 出价模型，传统 tCPA 投放效果急剧下滑。本文解析新模型逻辑、Firebase 信号配置与 ROI 优化路径。"
+keywords: "Google UAC 巴西, tROAS, Firebase, Slot 投放, iGaming 出价模型"
+date: "2026-05-04"
+tags: ["Brazil", "Google", "UAC"]
+category: "广告平台"
+quickAnswer: "Google 在 2026-04 升级巴西 UAC 算法，对 tCPA 模型限制加码（CPI 暴涨 60%+），tROAS（目标广告支出回报率）成为唯一可放量出价方式。要跑通 tROAS 必须打通 Firebase + GA4 + 后端 LTV 回传三层数据，BR21 提供完整对接方案。"
+keyPoints:
+  - "tCPA 模型的 CPI 在 2026-04 后平均上涨 62%，部分账户出现'有预算无消耗'"
+  - "tROAS 模型要求 30 天内累计 100+ 次回传付费事件作为冷启动基线"
+  - "Firebase 必须打通 first_open → registration → first_deposit → repeat_deposit 全链路"
+  - "GA4 与 Google Ads 的 LTV 回传延迟需控制在 4 小时以内"
+  - "tROAS 跑通后单户日消耗可从 $300 提升至 $5,000+，CPI 下降 35%"
+process:
+  - title: "Firebase 事件清单梳理"
+    description: "确认 SDK 已埋点 6 个核心事件：first_open、registration、kyc_passed、first_deposit、repeat_deposit、ftd_value。"
+  - title: "BigQuery 数据流接入"
+    description: "将 PIX 入金成功的真实金额从 BigQuery 通过 Conversion API 回传至 Google Ads，作为 ROAS 计算分子。"
+  - title: "tROAS 冷启动"
+    description: "用初期目标 ROAS 设为行业基线 80%，连续投放 7-14 天累计 100+ 付费事件后切换至 tROAS 模式。"
+  - title: "目标值动态调整"
+    description: "根据每周 ROAS 实绩，每次调整幅度不超过 ±15%，避免算法学习重置。"
+risks:
+  - "Firebase 与 Google Ads 数据不一致会被算法判定为'低质量回传'，抑制放量"
+  - "tROAS 目标设置过高（>150%）会导致预算无法消耗"
+  - "巴西 LGPD 要求用户明示同意才能回传 PII，需在 SDK 初始化前展示同意弹窗"
+faq:
+  - question: "tROAS 和 tCPA 哪个更好？"
+    answer: "2026 年起在巴西市场只能选 tROAS。tCPA 已被 Google 标记为'低优先级出价方式'，会主动降低拍卖参与度。"
+  - question: "回传金额需要包含 GGR 还是 NGR？"
+    answer: "推荐回传 NGR（Net Gaming Revenue），即扣除奖金、手续费后的净收入。这样算法会优化高 LTV 用户，避免奖金党。"
+  - question: "Firebase + GA4 + Google Ads 全链路对接需要多久？"
+    answer: "技术对接约 5-7 个工作日，数据稳定期约 14 天。BR21 提供完整 SDK 集成包与回传脚本，可缩短至 3 天。"
+---
+
+# Google 为什么在巴西"逼"运营商上 tROAS？
+
+简单一句话：**tCPA 让 Google 没钱赚，tROAS 让 Google 和优质广告主双赢。**
+
+tCPA 的逻辑是"按目标 CPA 出价"，Google 只能赚到 CPI 这一层利润，且容易被低质量流量套利。tROAS 是"按目标 ROAS 出价"——你给 Google 一个 ROAS 目标，Google 自己决定如何在保证 ROAS 的前提下放量，理论上**优质用户越多，Google 越愿意倾斜流量**。
+
+## 实测对比：tCPA vs tROAS（巴西 Slot 头部品牌）
+
+| 指标 | tCPA（2026-03） | tROAS（2026-05） |
+|------|----------------|------------------|
+| 日均消耗 | $1,200 | $5,400 |
+| CPI | $4.20 | $2.80 |
+| FTD Rate | 12% | 18% |
+| 7 日 ROAS | 95% | 142% |
+| 账户稳定性 | 中等（每月封 1 次） | 高（90 天 0 封） |
+
+数据来源：BR21 巴西头部 Slot 客户 8 个 BM 的实测对比。
+
+## 三层信号配置才是核心
+
+很多投手以为切换 tROAS 就是把出价模型改一下，结果跑了 3 天发现"算法学不会"——根本原因是**信号链路不完整**。
+
+### 第一层：客户端事件（Firebase SDK）
+
+最低要求 6 个事件，缺一个都会让算法判断"用户旅程不完整"：
+
+```
+first_open       → 应用首次打开
+registration     → 注册成功
+kyc_passed       → KYC 通过（巴西必须）
+first_deposit    → 首次入金（含金额参数）
+repeat_deposit   → 二次入金
+ftd_value        → 首充金额（自定义参数）
+```
+
+### 第二层：服务端回传（CAPI / Conversion API）
+
+客户端容易被刷量、被广告拦截器拦截。Google 强烈推荐通过 BigQuery → Conversion API 回传**真实成功的入金金额**作为 ROAS 计算依据。
+
+### 第三层：LTV 校准
+
+每天通过 Offline Conversion Import 把已注册用户的 7 日 LTV / 30 日 LTV 回传给 Google Ads。这一步会让算法**学会区分"短期高 ROAS 但 LTV 低"和"短期 ROAS 一般但 LTV 高"的两类用户**，长期效果差距巨大。
+
+## BR21 的接入方案
+
+我们为持牌运营商提供完整的 tROAS 部署服务：
+
+* **Firebase SDK 集成包**：包含 6 个核心事件 + 4 个推荐事件，支持 iOS / Android / Web
+* **BigQuery → Google Ads 回传脚本**：每 4 小时自动同步，支持 LGPD 合规过滤
+* **冷启动陪跑**：前 14 天每日数据复盘，目标在 Day 21 达到行业基线 ROAS
+
+**建议**：如果你的巴西 UAC 账户在 2026-04 之后 CPI 突然暴涨，第一件事不是换素材，而是检查你的出价模型——大概率你需要立即切换到 tROAS。
